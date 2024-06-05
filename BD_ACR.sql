@@ -10,6 +10,14 @@ CREATE TABLE Cargos (
     Descripción VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30),
+    password VARCHAR(30),
+    CargoID INT,
+    FOREIGN KEY (CargoID) REFERENCES Cargos(CargoID)
+);
+
 -- Crear la tabla Trabajadores
 CREATE TABLE Trabajadores (
     TrabajadorID INT AUTO_INCREMENT PRIMARY KEY,
