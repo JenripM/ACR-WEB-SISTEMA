@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 
 export class AppSideRegisterComponent {
-  employeename: string ="";
+  userName: string ="";
   email: string ="";
   password: string ="";
   constructor(private http: HttpClient )
@@ -19,11 +19,11 @@ export class AppSideRegisterComponent {
   {
   
     let bodyData = {
-      "employeename" : this.employeename,
+      "userName" : this.userName,
       "email" : this.email,
       "password" : this.password
     };
-    this.http.post("http://localhost:8080/api/v1/employee/save",bodyData,{responseType: 'text'}).subscribe((resultData: any)=>
+    this.http.post("http://localhost:8080/api/v1/user/save",bodyData,{responseType: 'text'}).subscribe((resultData: any)=>
     {
         console.log(resultData);
         alert("Employee Registered Successfully");

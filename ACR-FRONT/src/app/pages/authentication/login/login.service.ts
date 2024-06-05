@@ -8,7 +8,7 @@ import { Employee } from './login';
 })
 
 export class EmployeeService{
-    private url:string = "http://localhost:8080/api/v1/employee/all";
+    private url:string = "http://localhost:8080/api/v1/user/all";
 
     constructor( private http:HttpClient){}
     getAll():Observable<Employee[]>{

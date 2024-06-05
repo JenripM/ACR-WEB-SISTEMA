@@ -52,3 +52,5 @@ create table Correspondencia (
     ruta varchar(200),
     foreign key (Casoid) references Casos(Casoid)
 );
+
+
