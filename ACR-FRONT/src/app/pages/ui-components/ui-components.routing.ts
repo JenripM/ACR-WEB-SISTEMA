@@ -6,6 +6,7 @@ import { AppChipsComponent } from './chips/chips.component';
 import { AppListsComponent } from './lists/lists.component';
 import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
+import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -16,8 +17,8 @@ export const UiComponentsRoutes: Routes = [
         component: AppBadgeComponent,
       },
       {
-        path: 'chips',
-        component: AppChipsComponent,
+        path: 'trabajadores',
+        component: AppTrabajadoresComponent,
       },
       {
         path: 'lists',

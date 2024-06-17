@@ -20,7 +20,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Gestion de Trabajadores',
     iconName: 'poker-chip',
-    route: '/ui-components/chips',
+    route: '/ui-components/trabajadores',
   },
   {
     displayName: 'Gestion de Casos Juridicos',
