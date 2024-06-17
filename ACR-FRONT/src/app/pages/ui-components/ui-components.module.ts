@@ -17,6 +17,7 @@ import { AppListsComponent } from './lists/lists.component';
 import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
+    AppTrabajadoresComponent,
+
   ],
   declarations: [
     AppBadgeComponent,
