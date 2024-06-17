@@ -1,99 +1,100 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component } from '@angular/core';
-import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
-import {ThemePalette} from '@angular/material/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
 
-export interface ChipColor {
-  name: string;
-  color: ThemePalette;
-}
-
-export interface Fruit {
-  name: string;
-}
-
-export interface Vegetable {
-  name: string;
-}
-
+export interface UserData {
+    id: string;
+    name: string;
+    progress: string;
+    fruit: string;
+  }
+  
+  /** Constants used to fill up our data base. */
+  const FRUITS: string[] = [
+    'blueberry',
+    'lychee',
+    'kiwi',
+    'mango',
+    'peach',
+    'lime',
+    'pomegranate',
+    'pineapple',
+  ];
+  const NAMES: string[] = [
+    'Maia',
+    'Asher',
+    'Olivia',
+    'Atticus',
+    'Amelia',
+    'Jack',
+    'Charlotte',
+    'Theodore',
+    'Isla',
+    'Oliver',
+    'Isabella',
+    'Jasper',
+    'Cora',
+    'Levi',
+    'Violet',
+    'Arthur',
+    'Mia',
+    'Thomas',
+    'Elizabeth',
+  ];
+  
 @Component({
   selector: 'app-trabajadores',
   templateUrl: './trabajadores.component.html',
   styleUrls: ['./trabajadores.component.scss'],
+  standalone: true,
+  imports: [MatFormFieldModule, MatCardModule,MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
 })
-export class AppTrabajadoresComponent {
-  // drag n drop
-  vegetables: Vegetable[] = [
-    { name: 'apple' },
-    { name: 'banana' },
-    { name: 'strawberry' },
-    { name: 'orange' },
-    { name: 'kiwi' },
-    { name: 'cherry' },
-  ];
+export class AppTrabajadoresComponent implements AfterViewInit{
+  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+  dataSource: MatTableDataSource<UserData>;
 
-    // 
-    // Stacked
-    // 
-    availableColors: ChipColor[] = [
-      {name: 'Primary', color: 'primary'},
-      {name: 'Accent', color: 'accent'},
-      {name: 'Warn', color: 'warn'},
-    ];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
+  constructor() {
+    // Create 100 users
+    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
-  drop(event: Event) {
-    if (isDragDrop(event)) {
-      moveItemInArray(this.vegetables, event.previousIndex, event.currentIndex);
-    }
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(users);
   }
 
-  // 
-  //  chips with input
-  // 
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
-
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our fruit
-    if (value) {
-      this.fruits.push({ name: value });
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-  }
-
-  edit(fruit: Fruit, event: MatChipEditedEvent) {
-    const value = event.value.trim();
-
-    // Remove fruit if it no longer has a name
-    if (!value) {
-      this.remove(fruit);
-      return;
-    }
-
-    // Edit existing fruit
-    const index = this.fruits.indexOf(fruit);
-    if (index >= 0) {
-      this.fruits[index].name = value;
-    }
-
-  
   }
 }
-function isDragDrop(object: any): object is CdkDragDrop<string[]> {
-  return 'previousIndex' in object;
+
+/** Builds and returns a new User. */
+function createNewUser(id: number): UserData {
+  const name =
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+    ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+    '.';
+
+  return {
+    id: id.toString(),
+    name: name,
+    progress: Math.round(Math.random() * 100).toString(),
+    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+  };
 }

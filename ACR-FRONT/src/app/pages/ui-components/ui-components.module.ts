@@ -28,12 +28,13 @@ import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component'
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
+    AppTrabajadoresComponent,
+
   ],
   declarations: [
     AppBadgeComponent,
     AppChipsComponent,
     AppListsComponent,
-    AppTrabajadoresComponent,
     AppMenuComponent,
     AppTooltipsComponent,
   ],
