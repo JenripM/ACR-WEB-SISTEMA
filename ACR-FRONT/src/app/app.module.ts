@@ -24,6 +24,7 @@ import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
+import { RouterModule } from '@angular/router';  // Importar RouterModule
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    RouterModule.forRoot([]), 
     ReactiveFormsModule,
     MaterialModule,HttpClientModule,
     TablerIconsModule.pick(TablerIcons),

@@ -1,9 +1,22 @@
 <mat-card class="cardWithShadow theme-card">
     <mat-card-header>
       <mat-card-title class="m-b-0">TRABAJADORES</mat-card-title>
+  
     </mat-card-header>
     <mat-card-content class="b-t-1">
       <div class="row">
+        <div class="col-8"></div>
+        <div class="col-2">
+          <a mat-flat-button class="blue" href="http://localhost:4200/ui-components/trabajadores/registrar">+ Nuevo Trabajador</a>
+          
+        </div>
+        <div class="col-2">
+          <button mat-flat-button class="blue">+ Nuevo Cargo</button>
+
+        </div>
+      </div><br>
+      <div class="row">
+        
 
         <div class="col-12">
           <!-- ------------------------------------------------------------------------- -->
@@ -11,8 +24,8 @@
           <!-- ------------------------------------------------------------------------- -->
   
           <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
           </mat-form-field>
           
           <div class="mat-elevation-z8">
