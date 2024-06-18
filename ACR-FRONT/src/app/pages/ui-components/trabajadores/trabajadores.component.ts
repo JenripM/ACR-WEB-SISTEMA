@@ -5,6 +5,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 export interface UserData {
     id: string;
@@ -51,9 +52,10 @@ export interface UserData {
   templateUrl: './trabajadores.component.html',
   styleUrls: ['./trabajadores.component.scss'],
   standalone: true,
-  imports: [MatFormFieldModule, MatCardModule,MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatCardModule,MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
 })
 export class AppTrabajadoresComponent implements AfterViewInit{
+  
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   dataSource: MatTableDataSource<UserData>;
 
@@ -81,6 +83,7 @@ export class AppTrabajadoresComponent implements AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
+ 
 }
 
 /** Builds and returns a new User. */
@@ -97,4 +100,6 @@ function createNewUser(id: number): UserData {
     progress: Math.round(Math.random() * 100).toString(),
     fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
   };
+
+  
 }

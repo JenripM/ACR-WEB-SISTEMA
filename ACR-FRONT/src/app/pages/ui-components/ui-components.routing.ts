@@ -7,6 +7,7 @@ import { AppListsComponent } from './lists/lists.component';
 import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
+import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -19,6 +20,10 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'trabajadores',
         component: AppTrabajadoresComponent,
+      },
+      {
+        path: 'trabajadores/registrar',
+        component: AppTrabajadorRegistrarComponent,
       },
       {
         path: 'lists',

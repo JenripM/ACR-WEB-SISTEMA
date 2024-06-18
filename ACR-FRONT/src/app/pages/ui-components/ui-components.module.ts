@@ -18,6 +18,7 @@ import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
+import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component'
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
     AppTrabajadoresComponent,
-
+    
   ],
   declarations: [
     AppBadgeComponent,
@@ -37,6 +38,8 @@ import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component'
     AppListsComponent,
     AppMenuComponent,
     AppTooltipsComponent,
+    AppTrabajadorRegistrarComponent
+
   ],
 })
 export class UicomponentsModule {}
