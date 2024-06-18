@@ -10,12 +10,25 @@ CREATE TABLE Cargos (
     Descripción VARCHAR(255) NOT NULL
 );
 
+-- Crear la tabla Rol de usuarios
+CREATE TABLE Rol_users (
+    Rol_userID       INT AUTO_INCREMENT PRIMARY KEY,
+    Descripción      VARCHAR(255) NOT NULL,
+    clientes         TINYINT(1) not null,
+    trabajadores     TINYINT(1) not null,
+    casos            TINYINT(1) not null,
+    tareas           TINYINT(1) not null,
+    docum_corres     TINYINT(1) not null,
+    accesos          TINYINT(1) not null
+);
+
+-- Crear la tabla Usuarios
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30),
     password VARCHAR(30),
-    CargoID INT,
-    FOREIGN KEY (CargoID) REFERENCES Cargos(CargoID)
+    Rol_userID INT,
+    FOREIGN KEY (Rol_userID) REFERENCES Rol_users(Rol_userID)
 );
 
 -- Crear la tabla Trabajadores
