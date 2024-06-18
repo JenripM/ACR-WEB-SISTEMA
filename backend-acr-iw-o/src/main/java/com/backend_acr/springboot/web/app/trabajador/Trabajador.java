@@ -1,88 +1,103 @@
 package com.backend_acr.springboot.web.app.trabajador;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.backend_acr.springboot.web.app.cargo.Cargo;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="trabajadores")
 public class Trabajador {
+
     @Id
-    @Column(length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(length = 45)
     private int trabajadorId;
-    @Column
+
+    @Column(nullable = false)
     private String nombres;
+
+    @Column(nullable = false)
     private String apellidos;
+
+    @Column(nullable = false)
     private String direccion;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String celular;
-    
-    public Trabajador(){
-        
+
+    @ManyToOne
+    @JoinColumn(name = "cargo_id", nullable = false)
+    private Cargo cargo;
+
+    public Trabajador() {
     }
-	public Trabajador(int trabajadorId, String nombres, String apellidos, String direccion, String email,
-			String celular) {
-		super();
-		this.trabajadorId = trabajadorId;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.direccion = direccion;
-		this.email = email;
-		this.celular = celular;
-	}
 
-	public int getTrabajadorId() {
-		return trabajadorId;
-	}
+    public Trabajador(int trabajadorId, String nombres, String apellidos, String direccion, String email, String celular, Cargo cargo) {
+        this.trabajadorId = trabajadorId;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.email = email;
+        this.celular = celular;
+        this.cargo = cargo;
+    }
 
-	public void setTrabajadorId(int trabajadorId) {
-		this.trabajadorId = trabajadorId;
-	}
+    // Getters and Setters
+    public int getTrabajadorId() {
+        return trabajadorId;
+    }
 
-	public String getNombres() {
-		return nombres;
-	}
+    public void setTrabajadorId(int trabajadorId) {
+        this.trabajadorId = trabajadorId;
+    }
 
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
+    public String getNombres() {
+        return nombres;
+    }
 
-	public String getApellidos() {
-		return apellidos;
-	}
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
+    public String getApellidos() {
+        return apellidos;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getCelular() {
-		return celular;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
+    public String getCelular() {
+        return celular;
+    }
 
-	
-    
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
 }

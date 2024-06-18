@@ -15,26 +15,27 @@ public class TrabajadorController {
     private TrabajadorService trabajadorService;
 
     @PostMapping(path = "/save")
-    public ResponseEntity<String> saveTrabajador(@RequestBody TrabajadorDTO trabajadorDTO) {
-        String id = trabajadorService.addTrabajador(trabajadorDTO);
-        return ResponseEntity.ok(id);
+    public ResponseEntity<Trabajador> saveTrabajador(@RequestBody Trabajador trabajador) {
+        Trabajador newTrabajador = trabajadorService.addTrabajador(trabajador);
+        return ResponseEntity.ok(newTrabajador);
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<TrabajadorDTO>> getAllTrabajadores() {
-        List<TrabajadorDTO> trabajadores = trabajadorService.getAllTrabajadores();
+    public ResponseEntity<List<Trabajador>> getAllTrabajadores() {
+        List<Trabajador> trabajadores = trabajadorService.getAllTrabajadores();
         return ResponseEntity.ok(trabajadores);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<TrabajadorDTO> getTrabajadorById(@PathVariable int id) {
-        TrabajadorDTO trabajador = trabajadorService.getTrabajadorById(id);
+    public ResponseEntity<Trabajador> getTrabajadorById(@PathVariable int id) {
+        Trabajador trabajador = trabajadorService.getTrabajadorById(id)
+                .orElseThrow(() -> new RuntimeException("Trabajador not found"));
         return ResponseEntity.ok(trabajador);
     }
 
     @PutMapping(path = "/update/{id}")
-    public ResponseEntity<TrabajadorDTO> updateTrabajador(@PathVariable int id, @RequestBody TrabajadorDTO trabajadorDTO) {
-        TrabajadorDTO updatedTrabajador = trabajadorService.updateTrabajador(id, trabajadorDTO);
+    public ResponseEntity<Trabajador> updateTrabajador(@PathVariable int id, @RequestBody Trabajador trabajadorDetails) {
+        Trabajador updatedTrabajador = trabajadorService.updateTrabajador(id, trabajadorDetails);
         return ResponseEntity.ok(updatedTrabajador);
     }
 
