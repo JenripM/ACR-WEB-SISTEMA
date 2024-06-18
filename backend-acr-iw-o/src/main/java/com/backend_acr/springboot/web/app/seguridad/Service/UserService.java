@@ -8,6 +8,6 @@ import com.backend_acr.springboot.web.app.seguridad.response.LoginResponse;
 public interface UserService {
     String addUser(UserDTO userDTO);
     LoginResponse loginUser(LoginDTO loginDTO);
-    List<UserDTO> getAllUsers();  // Añadir este método
+    List<UserDTO> getAllUsers();  
 
 }
