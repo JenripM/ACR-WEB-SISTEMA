@@ -1,21 +1,44 @@
 <mat-card class="cardWithShadow theme-card">
     <mat-card-header>
       <mat-card-title class="m-b-0">REGISTRO DE TRABAJADORES</mat-card-title>
-  
     </mat-card-header>
     <mat-card-content class="b-t-1">
-    <br>
+      <br>
       <div class="row">
-        
-
+        <mat-form-field>
+            <mat-label>Input</mat-label>
+            <input matInput>
+          </mat-form-field>
         <div class="col-12">
-          <!-- ------------------------------------------------------------------------- -->
-          <!-- Input -->
-          <!-- ------------------------------------------------------------------------- -->
-  
-
-          
-          
+          <form [formGroup]="formularioRegistro" (ngSubmit)="registrarTrabajador()">
+            <div>
+              <label for="nombres">Nombres:</label>
+              <input type="text" id="nombres" formControlName="nombres" required>
+            </div>
+            <div>
+              <label for="apellidos">Apellidos:</label>
+              <input type="text" id="apellidos" formControlName="apellidos" required>
+            </div>
+            <div>
+              <label for="direccion">Dirección:</label>
+              <input type="text" id="direccion" formControlName="direccion" required>
+            </div>
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" id="email" formControlName="email" required>
+            </div>
+            <div>
+              <label for="celular">Celular:</label>
+              <input type="text" id="celular" formControlName="celular" required>
+            </div>
+            <div>
+              <label for="cargoId">Cargo:</label>
+              <select id="cargoId" formControlName="cargoId" required>
+                <option *ngFor="let cargo of cargos" [value]="cargo.id">{{ cargo.nombre }}</option>
+              </select>
+            </div>
+            <button type="submit">Registrar Trabajador</button>
+          </form>
         </div>
       </div>
     </mat-card-content>
