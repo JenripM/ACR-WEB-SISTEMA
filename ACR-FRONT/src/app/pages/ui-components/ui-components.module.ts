@@ -29,7 +29,6 @@ import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/regist
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
-    AppTrabajadoresComponent,
     AppTrabajadorRegistrarComponent
 
   ],
@@ -39,6 +38,8 @@ import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/regist
     AppListsComponent,
     AppMenuComponent,
     AppTooltipsComponent,
+    AppTrabajadoresComponent,
+
 
   ],
 })

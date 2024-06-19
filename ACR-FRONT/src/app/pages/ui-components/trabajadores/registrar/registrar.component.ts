@@ -89,7 +89,7 @@ export class AppTrabajadorRegistrarComponent implements OnInit {
         .subscribe(response => {
           console.log('Trabajador registrado exitosamente:', response);
           alert('Trabajador registrado exitosamente');
-          this.location.back(); // Vuelve a la página anterior
+          this.router.navigate(['/ui-components/trabajadores']); // Navega a la ruta '/ui-components/trabajadores'
         }, error => {
           console.error('Error al registrar el trabajador:', error);
           alert('Error al registrar el trabajador. Por favor, intenta nuevamente.');
