@@ -30,7 +30,8 @@ import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/regist
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
     AppTrabajadoresComponent,
-    
+    AppTrabajadorRegistrarComponent
+
   ],
   declarations: [
     AppBadgeComponent,
@@ -38,7 +39,6 @@ import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/regist
     AppListsComponent,
     AppMenuComponent,
     AppTooltipsComponent,
-    AppTrabajadorRegistrarComponent
 
   ],
 })
