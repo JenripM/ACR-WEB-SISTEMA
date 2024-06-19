@@ -4,43 +4,59 @@
     </mat-card-header>
     <mat-card-content class="b-t-1">
       <br>
-      <div class="row">
-        <mat-form-field>
-            <mat-label>Input</mat-label>
-            <input matInput>
-          </mat-form-field>
-        <div class="col-12">
-          <form [formGroup]="formularioRegistro" (ngSubmit)="registrarTrabajador()">
-            <div>
-              <label for="nombres">Nombres:</label>
-              <input type="text" id="nombres" formControlName="nombres" required>
-            </div>
-            <div>
-              <label for="apellidos">Apellidos:</label>
-              <input type="text" id="apellidos" formControlName="apellidos" required>
-            </div>
-            <div>
-              <label for="direccion">Dirección:</label>
-              <input type="text" id="direccion" formControlName="direccion" required>
-            </div>
-            <div>
-              <label for="email">Email:</label>
-              <input type="email" id="email" formControlName="email" required>
-            </div>
-            <div>
-              <label for="celular">Celular:</label>
-              <input type="text" id="celular" formControlName="celular" required>
-            </div>
-            <div>
-              <label for="cargoId">Cargo:</label>
-              <select id="cargoId" formControlName="cargoId" required>
-                <option *ngFor="let cargo of cargos" [value]="cargo.id">{{ cargo.nombre }}</option>
-              </select>
-            </div>
-            <button type="submit">Registrar Trabajador</button>
-          </form>
+      <form [formGroup]="formularioRegistro" (ngSubmit)="registrarTrabajador()">
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label>Nombres</mat-label>
+              <input matInput type="text" formControlName="nombres" required>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label>Apellidos</mat-label>
+              <input matInput type="text" formControlName="apellidos" required>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Dirección</mat-label>
+              <input matInput type="text" formControlName="direccion" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" required>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label>Celular</mat-label>
+              <input matInput type="text" formControlName="celular" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="full-width">
+              <mat-label>Cargo</mat-label>
+              <mat-select formControlName="cargoId" required>
+                <mat-option *ngFor="let cargo of cargos" [value]="cargo.id">{{ cargo.nombre }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button mat-raised-button color="primary" type="submit">Registrar Trabajador</button>
+          </div>
+        </div>
+      </form>
     </mat-card-content>
   </mat-card>
   
