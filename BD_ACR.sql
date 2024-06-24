@@ -13,7 +13,7 @@ CREATE TABLE Cargos (
 -- Crear la tabla Rol de usuarios
 CREATE TABLE Rol_users (
     Rol_userID       INT AUTO_INCREMENT PRIMARY KEY,
-    Descripción      VARCHAR(255) NOT NULL,
+    Descripcion      VARCHAR(255) NOT NULL,
     clientes         TINYINT(1) not null,
     trabajadores     TINYINT(1) not null,
     casos            TINYINT(1) not null,
