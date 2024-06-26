@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface Trabajador {
   id: number;
@@ -23,7 +24,7 @@ export interface Trabajador {
   styleUrls: ['./trabajadores.component.scss']
 })
 export class AppTrabajadoresComponent implements OnInit {
-  displayedColumns: string[] = ['trabajadorId', 'nombres', 'apellidos', 'direccion', 'email', 'celular', 'cargo'];
+  displayedColumns: string[] = ['trabajadorId', 'nombres', 'apellidos', 'direccion', 'email', 'celular', 'cargo', 'actions'];
   dataSource: MatTableDataSource<Trabajador>; // Asegúrate de que MatTableDataSource sea del tipo Trabajador
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

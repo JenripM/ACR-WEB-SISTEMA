@@ -19,6 +19,10 @@ import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
+import { CargoComponent } from './cargo/cargo.component';
+import { MatIconModule } from '@angular/material/icon';
+import { EditarComponent } from './trabajadores/editar/editar.component';
+import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
 
 @NgModule({
   imports: [
@@ -29,8 +33,11 @@ import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/regist
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
-    AppTrabajadorRegistrarComponent
-
+    AppTrabajadorRegistrarComponent,
+    CargoComponent,
+    EditarComponent,
+    EliminarComponent,
+    MatIconModule
   ],
   declarations: [
     AppBadgeComponent,
@@ -39,7 +46,7 @@ import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/regist
     AppMenuComponent,
     AppTooltipsComponent,
     AppTrabajadoresComponent,
-
+    
 
   ],
 })

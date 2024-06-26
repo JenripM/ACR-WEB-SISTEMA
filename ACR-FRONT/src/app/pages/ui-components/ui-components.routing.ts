@@ -8,6 +8,10 @@ import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
+import { CargoComponent } from './cargo/cargo.component';
+import { EditarComponent } from './trabajadores/editar/editar.component';
+import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
+import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -26,6 +30,18 @@ export const UiComponentsRoutes: Routes = [
         component: AppTrabajadorRegistrarComponent,
       },
       {
+        path: 'trabajadores/editar/:id',
+        component: EditarComponent,
+      },
+      {
+        path: 'trabajadores/eliminar/:id',
+        component: EliminarComponent,
+      },
+      {
+        path: 'cargo',
+        component: CargoComponent,
+      },
+      {
         path: 'lists',
         component: AppListsComponent,
       },
@@ -36,6 +52,10 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'tooltips',
         component: AppTooltipsComponent,
+      },
+      {
+        path: 'roles-usuario',
+        component: RolesUsuarioComponent,
       },
     ],
   },

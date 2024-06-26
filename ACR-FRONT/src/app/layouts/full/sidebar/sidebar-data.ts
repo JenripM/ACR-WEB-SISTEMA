@@ -65,6 +65,6 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Gestión de Accesos',
     iconName: 'lock',
-    route: '/extra/sample-page',
+    route: '/ui-components/roles-usuario',
   },
 ];
