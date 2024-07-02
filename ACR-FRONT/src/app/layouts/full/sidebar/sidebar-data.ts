@@ -25,17 +25,17 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Gestion de Casos Juridicos',
     iconName: 'list',
-    route: '/ui-components/lists',
+    route: '/ui-components/casosjuridicos',
   },
   {
     displayName: 'Asignacion de Tareas',
     iconName: 'layout-navbar-expand',
-    route: '/ui-components/menu',
+    route: '/ui-components/asignaciontareas',
   },
   {
     displayName: 'Gestion de Documentos',
     iconName: 'tooltip',
-    route: '/ui-components/tooltips',
+    route: '/ui-components/documentos',
   },
   /*{
     navCap: 'Auth',
@@ -54,7 +54,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Correspondencia',
     iconName: 'mood-smile',
-    route: '/extra/icons',
+    route: '/ui-components/correspondencia',
   },
   {
     navCap: '',

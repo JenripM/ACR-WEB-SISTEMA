@@ -12,6 +12,10 @@ import { CargoComponent } from './cargo/cargo.component';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
+import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.component';
+import { AsignaciontareasComponent } from './asignaciontareas/asignaciontareas.component';
+import { DocumentosComponent } from './documentos/documentos.component';
+import { CorrespondenciaComponent } from './correspondencia/correspondencia.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -42,16 +46,20 @@ export const UiComponentsRoutes: Routes = [
         component: CargoComponent,
       },
       {
-        path: 'lists',
-        component: AppListsComponent,
+        path: 'casosjuridicos',
+        component: CasosjuridicosComponent,
       },
       {
-        path: 'menu',
-        component: AppMenuComponent,
+        path: 'asignaciontareas',
+        component: AsignaciontareasComponent,
       },
       {
-        path: 'tooltips',
-        component: AppTooltipsComponent,
+        path: 'documentos',
+        component: DocumentosComponent,
+      },
+      {
+        path: 'correspondencia',
+        component: CorrespondenciaComponent,
       },
       {
         path: 'roles-usuario',
