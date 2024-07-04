@@ -123,13 +123,4 @@ public class Actividad {
     public void setCaso(Caso caso) {
         this.caso = caso;
     }
-
-    public Trabajador getTrabajador() {
-        return trabajador;
-    }
-
-    public void setTrabajador(Trabajador trabajador) {
-        this.trabajador = trabajador;
-    }
-
 }
