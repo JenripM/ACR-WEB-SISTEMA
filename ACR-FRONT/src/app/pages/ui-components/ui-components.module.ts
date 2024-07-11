@@ -23,6 +23,7 @@ import { CargoComponent } from './cargo/cargo.component';
 import { MatIconModule } from '@angular/material/icon';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
+import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
     CargoComponent,
     EditarComponent,
     EliminarComponent,
-    MatIconModule
+    MatIconModule,
+    CasosjuridicosComponent
   ],
   declarations: [
     AppBadgeComponent,
@@ -46,8 +48,7 @@ import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
     AppMenuComponent,
     AppTooltipsComponent,
     AppTrabajadoresComponent,
-    
-
+    CasosjuridicosComponent,
   ],
 })
 export class UicomponentsModule {}

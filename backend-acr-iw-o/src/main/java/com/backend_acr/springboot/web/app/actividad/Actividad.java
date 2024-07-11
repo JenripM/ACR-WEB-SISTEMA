@@ -65,6 +65,14 @@ public class Actividad {
     public void setTiempo(int tiempo) {
         this.tiempo = tiempo;
     }
+
+    public Trabajador getTrabajador() {
+        return trabajador;
+    }
+
+    public void setTrabajador(Trabajador trabajador) {
+        this.trabajador = trabajador;
+    }
 }
 
 }
