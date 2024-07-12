@@ -1,15 +1,12 @@
 <mat-card class="cardWithShadow theme-card">
   <mat-card-header>
-    <mat-card-title class="m-b-0">TRABAJADORES</mat-card-title>
+    <mat-card-title class="m-b-0">CASOS</mat-card-title>
   </mat-card-header>
   <mat-card-content class="b-t-1">
     <div class="row">
       <div class="col-8"></div>
       <div class="col-2">
-        <a mat-flat-button class="blue" href="http://localhost:4200/ui-components/trabajadores/registrar">+ Nuevo Trabajador</a>
-      </div>
-      <div class="col-2">
-        <a mat-flat-button class="blue" href="http://localhost:4200/ui-components/cargo">+ Nuevo Cargo</a>
+        <a mat-flat-button class="blue" href="http://localhost:4200/ui-components/casosjuridicos/registrar">+ Nuevo Caso</a>
       </div>
     </div>
     <br>
@@ -22,46 +19,46 @@
         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSource" matSort>
             <!-- ID Column -->
-            <ng-container matColumnDef="trabajadorId">
+            <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-              <td mat-cell *matCellDef="let trabajador"> {{trabajador.trabajadorId}} </td>
+              <td mat-cell *matCellDef="let caso"> {{caso.id}} </td>
             </ng-container>
-            <!-- Nombres Column -->
-            <ng-container matColumnDef="nombres">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
-              <td mat-cell *matCellDef="let trabajador"> {{trabajador.nombres}} </td>
+            <!-- Tipo Column -->
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+              <td mat-cell *matCellDef="let caso"> {{caso.tipo}} </td>
             </ng-container>
-            <!-- Apellidos Column -->
-            <ng-container matColumnDef="apellidos">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
-              <td mat-cell *matCellDef="let trabajador"> {{trabajador.apellidos}} </td>
+            <!-- EStado Column -->
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+              <td mat-cell *matCellDef="let caso"> {{caso.estado}} </td>
             </ng-container>
-            <!-- Dirección Column -->
-            <ng-container matColumnDef="direccion">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </th>
-              <td mat-cell *matCellDef="let trabajador"> {{trabajador.direccion}} </td>
+            <!-- fecha_inicio Column -->
+            <ng-container matColumnDef="fecha_inicio">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de inicio </th>
+              <td mat-cell *matCellDef="let caso"> {{caso.fecha_inicio}} </td>
             </ng-container>
-            <!-- Email Column -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-              <td mat-cell *matCellDef="let trabajador"> {{trabajador.email}} </td>
+            <!-- fecha_cierre Column -->
+            <ng-container matColumnDef="fecha_cierre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de cierre </th>
+              <td mat-cell *matCellDef="let caso"> {{caso.fecha_cierre}} </td>
             </ng-container>
-            <!-- Celular Column -->
-            <ng-container matColumnDef="celular">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Celular </th>
-              <td mat-cell *matCellDef="let trabajador"> {{trabajador.celular}} </td>
+            <!-- Descripcion Column -->
+            <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+              <td mat-cell *matCellDef="let caso"> {{caso.descripcion}} </td>
             </ng-container>
-            <!-- Cargo Column -->
-            <ng-container matColumnDef="cargo">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
-              <td mat-cell *matCellDef="let trabajador"> {{trabajador.cargo.nombre}} </td>
+            <!-- Cliente Column -->
+            <ng-container matColumnDef="cliente">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+              <td mat-cell *matCellDef="let caso"> {{caso.cliente.nombre}} </td>
             </ng-container>
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef> Acciones </th>
-              <td mat-cell *matCellDef="let trabajador">
-                <a mat-flat-button class="blue" [href]="'http://localhost:4200/ui-components/trabajadores/editar/' + trabajador.trabajadorId"><img src="../../../../assets/images//svgs/edit_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt=""></a><br><br>
-                <a mat-flat-button class="red" [href]="'http://localhost:4200/ui-components/trabajadores/eliminar/' + trabajador.trabajadorId"><img src="../../../../assets/images/svgs/delete_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt=""></a>
+              <td mat-cell *matCellDef="let caso">
+                <a mat-flat-button class="blue" [href]="'http://localhost:4200/ui-components/casosjuridicos/editar/' + caso.id"><img src="../../../../assets/images//svgs/edit_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt=""></a><br><br>
+                <a mat-flat-button class="red" [href]="'http://localhost:4200/ui-components/casosjuridicos/eliminar/' + caso.id"><img src="../../../../assets/images/svgs/delete_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt=""></a>
               </td>
             </ng-container>
 

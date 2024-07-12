@@ -5,16 +5,20 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 
-export interface Trabajador {
+export interface Caso {
   id: number;
-  nombres: string;
-  apellidos: string;
-  direccion: string;
-  email: string;
-  celular: string;
-  cargo: {
+  tipo: string;
+  estado: string;
+  fecha_inicio: Date;
+  fecha_cierre: Date;
+  descripcion: string;
+  cliente: {
     id: number;
     nombre: string;
+    apellido: string;
+    direccion: string;
+    telefono: string;
+    correoElectronico: string;
   };
 }
 @Component({
@@ -23,28 +27,28 @@ export interface Trabajador {
   styleUrls: ['./casosjuridicos.component.scss']
 })
 export class CasosjuridicosComponent  implements OnInit{
-  displayedColumns: string[] = ['trabajadorId', 'nombres', 'apellidos', 'direccion', 'email', 'celular', 'cargo', 'actions'];
-  dataSource: MatTableDataSource<Trabajador>; // Asegúrate de que MatTableDataSource sea del tipo Trabajador
+  displayedColumns: string[] = ['id', 'tipo', 'estado', 'fecha_inicio', 'fecha_cierre', 'descripcion', 'cliente', 'actions'];
+  dataSource: MatTableDataSource<Caso>; // Asegúrate de que MatTableDataSource sea del tipo Trabajador
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private http: HttpClient) {
-    this.dataSource = new MatTableDataSource<Trabajador>([]); // Inicializa MatTableDataSource con un arreglo vacío de Trabajador
+    this.dataSource = new MatTableDataSource<Caso>([]); // Inicializa MatTableDataSource con un arreglo vacío de Trabajador
   }
 
   ngOnInit(): void {
-    this.obtenerTrabajadores();
+    this.obtenerCasos();
   }
 
-  obtenerTrabajadores() {
-    this.http.get<Trabajador[]>('http://localhost:8080/api/v1/trabajador/all')
-      .subscribe(trabajadores => {
-        this.dataSource.data = trabajadores; // Asigna los datos obtenidos al arreglo de datos de MatTableDataSource
+  obtenerCasos() {
+    this.http.get<Caso[]>('http://localhost:8080/api/v1/caso/all')
+      .subscribe(casos => {
+        this.dataSource.data = casos; // Asigna los datos obtenidos al arreglo de datos de MatTableDataSource
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }, error => {
-        console.error('Error al obtener los trabajadores:', error);
+        console.error('Error al obtener los casos:', error);
       });
   }
 
