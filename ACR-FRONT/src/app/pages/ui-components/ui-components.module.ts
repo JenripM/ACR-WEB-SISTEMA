@@ -39,7 +39,6 @@ import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.compone
     EditarComponent,
     EliminarComponent,
     MatIconModule,
-    CasosjuridicosComponent
   ],
   declarations: [
     AppBadgeComponent,
@@ -49,6 +48,8 @@ import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.compone
     AppTooltipsComponent,
     AppTrabajadoresComponent,
     CasosjuridicosComponent,
+
+
   ],
 })
 export class UicomponentsModule {}
