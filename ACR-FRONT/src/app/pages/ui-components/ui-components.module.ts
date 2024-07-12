@@ -19,11 +19,12 @@ import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
+import { AppCasosRegistrarComponent } from './casosjuridicos/registrar/registrar.component';
+import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.component';
 import { CargoComponent } from './cargo/cargo.component';
 import { MatIconModule } from '@angular/material/icon';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
-import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.compone
     TablerIconsModule.pick(TablerIcons),
     MatNativeDateModule,
     AppTrabajadorRegistrarComponent,
+    AppCasosRegistrarComponent,
     CargoComponent,
     EditarComponent,
     EliminarComponent,

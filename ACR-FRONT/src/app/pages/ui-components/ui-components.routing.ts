@@ -8,6 +8,7 @@ import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
+import { AppCasosRegistrarComponent } from './casosjuridicos/registrar/registrar.component';
 import { CargoComponent } from './cargo/cargo.component';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
@@ -50,6 +51,10 @@ export const UiComponentsRoutes: Routes = [
         component: CasosjuridicosComponent,
       },
       {
+        path: 'casosjuridicos/registrar',
+        component: AppCasosRegistrarComponent,
+      },
+      {
         path: 'asignaciontareas',
         component: AsignaciontareasComponent,
       },
@@ -68,4 +73,3 @@ export const UiComponentsRoutes: Routes = [
     ],
   },
 ];
- 

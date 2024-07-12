@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content class="b-t-1">
     <div class="row">
-      <div class="col-8"></div>
+      <div class="col-10"></div>
       <div class="col-2">
         <a mat-flat-button class="blue" href="http://localhost:4200/ui-components/casosjuridicos/registrar">+ Nuevo Caso</a>
       </div>
@@ -19,38 +19,38 @@
         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSource" matSort>
             <!-- ID Column -->
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <ng-container matColumnDef="id" >
+              <th mat-header-cell *matHeaderCellDef > ID </th>
               <td mat-cell *matCellDef="let caso"> {{caso.id}} </td>
             </ng-container>
             <!-- Tipo Column -->
             <ng-container matColumnDef="tipo">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+              <th mat-header-cell *matHeaderCellDef > Tipo </th>
               <td mat-cell *matCellDef="let caso"> {{caso.tipo}} </td>
             </ng-container>
-            <!-- EStado Column -->
+            <!-- Estado Column -->
             <ng-container matColumnDef="estado">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+              <th mat-header-cell *matHeaderCellDef> Estado </th>
               <td mat-cell *matCellDef="let caso"> {{caso.estado}} </td>
             </ng-container>
             <!-- fecha_inicio Column -->
             <ng-container matColumnDef="fecha_inicio">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de inicio </th>
+              <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
               <td mat-cell *matCellDef="let caso"> {{caso.fecha_inicio}} </td>
             </ng-container>
             <!-- fecha_cierre Column -->
             <ng-container matColumnDef="fecha_cierre">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de cierre </th>
+              <th mat-header-cell *matHeaderCellDef> Fecha de cierre </th>
               <td mat-cell *matCellDef="let caso"> {{caso.fecha_cierre}} </td>
             </ng-container>
             <!-- Descripcion Column -->
             <ng-container matColumnDef="descripcion">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+              <th mat-header-cell *matHeaderCellDef> Descripcion </th>
               <td mat-cell *matCellDef="let caso"> {{caso.descripcion}} </td>
             </ng-container>
             <!-- Cliente Column -->
             <ng-container matColumnDef="cliente">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+              <th mat-header-cell *matHeaderCellDef> Cliente </th>
               <td mat-cell *matCellDef="let caso"> {{caso.cliente.nombre}} </td>
             </ng-container>
             <!-- Actions Column -->
