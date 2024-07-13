@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-trabajador-eliminar',
+  selector: 'app-casosjuridicos-eliminar',
   templateUrl: './eliminar.component.html',
   imports: [
     CommonModule,
@@ -17,9 +17,9 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CasoEliminarComponent implements OnInit {
-  trabajador: any;
-  trabajadorId: string | undefined;
+export class CasosEliminarComponent implements OnInit {
+  caso: any;
+  casoId: string | undefined;
 
   constructor(
     private http: HttpClient,
@@ -29,40 +29,41 @@ export class CasoEliminarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.trabajadorId = this.route.snapshot.paramMap.get('id')!;
-    this.obtenerTrabajador(this.trabajadorId);
+    this.casoId = this.route.snapshot.paramMap.get('id')!;
+    this.obtenerCaso(this.casoId);
   }
 
-  obtenerTrabajador(id: string) {
-    this.http.get<any>(`http://localhost:8080/api/v1/trabajador/${id}`)
+  obtenerCaso(id: string) {
+    this.http.get<any>(`http://localhost:8080/api/v1/caso/${id}`)
       .subscribe(
-        trabajador => {
-          this.trabajador = trabajador;
-          console.log('Trabajador obtenido:', trabajador);
+        caso => {
+          this.caso = caso;
+          console.log('Caso obtenido:', caso);
         },
         error => {
-          console.error('Error al obtener el trabajador:', error);
+          console.error('Error al obtener el caso:', error);
         }
       );
   }
 
+
   confirmarEliminacion() {
-    this.http.delete<any>(`http://localhost:8080/api/v1/trabajador/delete/${this.trabajadorId}`)
+    this.http.delete<any>(`http://localhost:8080/api/v1/caso/delete/${this.casoId}`)
       .subscribe(
         response => {
-          console.log('Trabajador eliminado exitosamente:', response);
-          alert('Trabajador eliminado exitosamente');
-          this.router.navigate(['/ui-components/trabajadores']);
+          console.log('Caso eliminado exitosamente:', response);
+          alert('Caso eliminado exitosamente');
+          this.router.navigate(['/ui-components/casosjuridicos']);
         },
         error => {
-          console.error('Error al eliminar el trabajador:', error);
-          alert('Error al eliminar el trabajador. Por favor, intenta nuevamente.');
+          console.error('Error al eliminar el caso:', error);
+          alert('Error al eliminar el caso. Por favor, intenta nuevamente.');
         }
       );
   }
 
   cancelarEliminacion() {
-    this.router.navigate(['/ui-components/trabajadores']);
+    this.router.navigate(['/ui-components/casosjuridicos']);
   }
 }
 

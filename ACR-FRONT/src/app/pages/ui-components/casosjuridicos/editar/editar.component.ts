@@ -45,7 +45,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class AppCasosEditarComponent implements OnInit {
+export class CasosEditarComponent implements OnInit {
   formularioEdicion: FormGroup;
   clientes: any[] = []; // Arreglo para almacenar los clientes obtenidos del servidor
   casoId: string | undefined;
