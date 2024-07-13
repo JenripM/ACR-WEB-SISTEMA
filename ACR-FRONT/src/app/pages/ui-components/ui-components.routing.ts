@@ -9,6 +9,7 @@ import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
 import { AppCasosRegistrarComponent } from './casosjuridicos/registrar/registrar.component';
+import { AppCasosEditarComponent } from './casosjuridicos/editar/editar.component';
 import { CargoComponent } from './cargo/cargo.component';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
@@ -53,6 +54,10 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'casosjuridicos/registrar',
         component: AppCasosRegistrarComponent,
+      },
+      {
+        path: 'casosjuridicos/editar/:id',
+        component: AppCasosEditarComponent,
       },
       {
         path: 'asignaciontareas',

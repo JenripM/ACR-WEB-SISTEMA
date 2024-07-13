@@ -22,7 +22,7 @@ public class Actividad {
     @Column(nullable = false)
     private String estado;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date fecha_inicio;
 
     @Column(nullable = true)

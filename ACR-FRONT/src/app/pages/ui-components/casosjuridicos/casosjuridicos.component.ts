@@ -41,6 +41,14 @@ export class CasosjuridicosComponent  implements OnInit{
     this.obtenerCasos();
   }
 
+  formatDate(dateTimeString: string) {
+    const date = new Date(dateTimeString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   obtenerCasos() {
     this.http.get<Caso[]>('http://localhost:8080/api/v1/caso/all')
       .subscribe(casos => {

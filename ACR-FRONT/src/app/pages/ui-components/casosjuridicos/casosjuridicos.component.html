@@ -36,12 +36,12 @@
             <!-- fecha_inicio Column -->
             <ng-container matColumnDef="fecha_inicio">
               <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
-              <td mat-cell *matCellDef="let caso"> {{caso.fecha_inicio}} </td>
+              <td mat-cell *matCellDef="let caso"> {{caso.fecha_inicio | date:'dd/MM/yyyy'}} </td>
             </ng-container>
             <!-- fecha_cierre Column -->
             <ng-container matColumnDef="fecha_cierre">
               <th mat-header-cell *matHeaderCellDef> Fecha de cierre </th>
-              <td mat-cell *matCellDef="let caso"> {{caso.fecha_cierre}} </td>
+              <td mat-cell *matCellDef="let caso"> {{caso.fecha_cierre | date:'dd/MM/yyyy'}} </td>
             </ng-container>
             <!-- Descripcion Column -->
             <ng-container matColumnDef="descripcion">
@@ -69,7 +69,7 @@
               <td class="mat-cell" colspan="8">No hay datos que coincidan con el filtro "{{dataSource.filter}}"</td>
             </tr>
           </table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" aria-label="Select page of users"></mat-paginator>
         </div>
       </div>
     </div>

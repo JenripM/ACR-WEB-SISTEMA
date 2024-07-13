@@ -20,6 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
 import { AppCasosRegistrarComponent } from './casosjuridicos/registrar/registrar.component';
+import { AppCasosEditarComponent } from './casosjuridicos/editar/editar.component';
 import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.component';
 import { CargoComponent } from './cargo/cargo.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -37,6 +38,7 @@ import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
     MatNativeDateModule,
     AppTrabajadorRegistrarComponent,
     AppCasosRegistrarComponent,
+    AppCasosEditarComponent,
     CargoComponent,
     EditarComponent,
     EliminarComponent,
@@ -50,6 +52,7 @@ import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
     AppTooltipsComponent,
     AppTrabajadoresComponent,
     CasosjuridicosComponent,
+
 
 
   ],
