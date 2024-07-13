@@ -5,7 +5,7 @@ import java.util.Date;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="casos")
+@Table(name = "casos")
 public class Caso {
 
     @Id
@@ -19,7 +19,7 @@ public class Caso {
     @Column(nullable = false)
     private String estado;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date fecha_inicio;
 
     @Column(nullable = true)
@@ -35,7 +35,8 @@ public class Caso {
     public Caso() {
     }
 
-    public Caso(int id, String tipo, String estado, Date fecha_inicio, Date fecha_cierre, String descripcion, Cliente cliente) {
+    public Caso(int id, String tipo, String estado, Date fecha_inicio, Date fecha_cierre, String descripcion,
+            Cliente cliente) {
         this.id = id;
         this.tipo = tipo;
         this.estado = estado;

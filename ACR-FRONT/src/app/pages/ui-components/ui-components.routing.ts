@@ -8,6 +8,8 @@ import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
+import { CasosRegistrarComponent } from './casosjuridicos/registrar/registrar.component';
+import { CasosEditarComponent } from './casosjuridicos/editar/editar.component';
 import { CargoComponent } from './cargo/cargo.component';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
@@ -16,6 +18,7 @@ import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.compone
 import { AsignaciontareasComponent } from './asignaciontareas/asignaciontareas.component';
 import { DocumentosComponent } from './documentos/documentos.component';
 import { CorrespondenciaComponent } from './correspondencia/correspondencia.component';
+import { CasosEliminarComponent } from './casosjuridicos/eliminar/eliminar.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -50,6 +53,18 @@ export const UiComponentsRoutes: Routes = [
         component: CasosjuridicosComponent,
       },
       {
+        path: 'casosjuridicos/registrar',
+        component: CasosRegistrarComponent,
+      },
+      {
+        path: 'casosjuridicos/editar/:id',
+        component: CasosEditarComponent,
+      },
+      {
+        path: 'casosjuridicos/eliminar/:id',
+        component: CasosEliminarComponent,
+      },
+      {
         path: 'asignaciontareas',
         component: AsignaciontareasComponent,
       },
@@ -68,4 +83,3 @@ export const UiComponentsRoutes: Routes = [
     ],
   },
 ];
- 

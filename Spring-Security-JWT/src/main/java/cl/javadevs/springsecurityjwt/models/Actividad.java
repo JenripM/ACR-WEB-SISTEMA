@@ -2,8 +2,6 @@ package cl.javadevs.springsecurityjwt.models;
 
 import java.util.Date;
 
-
-
 import jakarta.persistence.*;
 
 @Entity
@@ -24,7 +22,7 @@ public class Actividad {
     @Column(nullable = false)
     private String estado;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date fecha_inicio;
 
     @Column(nullable = true)
@@ -131,5 +129,4 @@ public class Actividad {
     public void setTrabajador(Trabajador trabajador) {
         this.trabajador = trabajador;
     }
-
 }
