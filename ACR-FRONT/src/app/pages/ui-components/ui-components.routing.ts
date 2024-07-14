@@ -14,6 +14,9 @@ import { CargoComponent } from './cargo/cargo.component';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
 import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
+import { UsuarioRegistrarComponent } from './roles-usuario/registrar/registrar.component';
+import { UsuarioEliminarComponent } from './roles-usuario/eliminar/eliminar.component';
+import { UsuarioEditarComponent } from './roles-usuario/editar/editar.component';
 import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.component';
 import { AsignaciontareasComponent } from './asignaciontareas/asignaciontareas.component';
 import { DocumentosComponent } from './documentos/documentos.component';
@@ -79,6 +82,18 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'roles-usuario',
         component: RolesUsuarioComponent,
+      },
+      {
+        path: 'roles-usuario/registrar',
+        component: UsuarioRegistrarComponent,
+      },
+      {
+        path: 'roles-usuario/eliminar/:id',
+        component: UsuarioEliminarComponent,
+      },
+      {
+        path: 'roles-usuario/editar/:id',
+        component: UsuarioEditarComponent,
       },
     ],
   },
