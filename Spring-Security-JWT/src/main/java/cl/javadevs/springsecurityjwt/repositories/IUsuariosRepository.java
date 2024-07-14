@@ -13,4 +13,10 @@ public interface IUsuariosRepository extends JpaRepository<Usuarios, Long> {
 
     //Método para poder verificar si un usuario existe en nuestra base de datos
     Boolean existsByUsername(String username);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM usuarios_roles WHERE usuario_id = :idUsuario", nativeQuery = true)
+    void deleteRolesByUsuarioId(@Param("idUsuario") Long idUsuario);
 }
