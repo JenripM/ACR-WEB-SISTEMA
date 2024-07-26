@@ -138,7 +138,8 @@ export class CasosRegistrarComponent implements OnInit {
           nombre: '' // Puedes dejar esto vacío o no incluirlo si el backend no lo requiere
         }
       };
-      console.log('Caso registrado exitosamente:', casoData.tipo,casoData.estado,casoData.fecha_inicio,casoData.fecha_cierre,casoData.fecha_cierre,casoData.fecha_cierre);
+      console.log('Caso registrado exitosamente:', casoData.tipo,casoData.estado,
+        casoData.fecha_inicio,casoData.fecha_cierre,casoData.fecha_cierre,casoData.fecha_cierre);
 
       this.http.post<any>('http://localhost:8080/api/v1/caso/save', casoData)
         .subscribe(response => {
