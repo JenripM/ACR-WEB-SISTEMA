@@ -56,4 +56,13 @@ public class ActividadController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(path = "/caso/{casoId}")
+    public ResponseEntity<List<Actividad>> getActividadesByCasoId(@PathVariable int casoId) {
+        List<Actividad> actividades = actividadService.getActividadesByCasoId(casoId);
+        if (actividades.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(actividades);
+    }
+
 }

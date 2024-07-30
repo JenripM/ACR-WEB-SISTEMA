@@ -11,7 +11,7 @@ export class AppBadgeComponent implements OnInit {
   isNewClienteModalVisible = false;
   isEditClienteModalVisible = false;
   isDeleteClienteModalVisible = false;
-  
+
   newCliente: Cliente = {
     id: 0,
     nombre: '',

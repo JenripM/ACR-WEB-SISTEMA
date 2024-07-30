@@ -10,6 +10,10 @@ import { AppTrabajadoresComponent } from './trabajadores/trabajadores.component'
 import { AppTrabajadorRegistrarComponent } from './trabajadores/registrar/registrar.component';
 import { CasosRegistrarComponent } from './casosjuridicos/registrar/registrar.component';
 import { CasosEditarComponent } from './casosjuridicos/editar/editar.component';
+import { CasosCasoComponent } from './casosjuridicos/caso/caso.component';
+import { ActividadesRegistrarComponent } from './casosjuridicos/actividades/registrar/registrar.component';
+import { ActividadesEliminarComponent } from './casosjuridicos/actividades/eliminar/eliminar.component';
+import { ActividadesEditarComponent } from './casosjuridicos/actividades/editar/editar.component';
 import { CargoComponent } from './cargo/cargo.component';
 import { EditarComponent } from './trabajadores/editar/editar.component';
 import { EliminarComponent } from './trabajadores/eliminar/eliminar.component';
@@ -60,12 +64,28 @@ export const UiComponentsRoutes: Routes = [
         component: CasosRegistrarComponent,
       },
       {
+        path: 'casosjuridicos/caso/:id',
+        component: CasosCasoComponent,
+      },
+      {
         path: 'casosjuridicos/editar/:id',
         component: CasosEditarComponent,
       },
       {
         path: 'casosjuridicos/eliminar/:id',
         component: CasosEliminarComponent,
+      },
+      {
+        path: 'casosjuridicos/actividades/registrar/:id',
+        component: ActividadesRegistrarComponent,
+      },
+      {
+        path: 'casosjuridicos/actividades/eliminar/:id',
+        component: ActividadesEliminarComponent,
+      },
+      {
+        path: 'casosjuridicos/actividades/editar/:id',
+        component: ActividadesEditarComponent,
       },
       {
         path: 'asignaciontareas',
