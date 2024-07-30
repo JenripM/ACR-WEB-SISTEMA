@@ -9,13 +9,10 @@ import org.springframework.stereotype.Service;
 import cl.javadevs.springsecurityjwt.models.Actividad;
 import cl.javadevs.springsecurityjwt.repositories.ActividadRepository;
 
-
 @Service
 public class ActividadService {
     @Autowired
     private ActividadRepository actividadRepository;
-
-
 
     public Actividad addActividad(Actividad actividad) {
         return actividadRepository.save(actividad);
@@ -45,5 +42,9 @@ public class ActividadService {
 
     public void deleteActividad(int id) {
         actividadRepository.deleteById(id);
+    }
+
+    public List<Actividad> getActividadesByCasoId(int casoId) {
+        return actividadRepository.findByCasoId(casoId);
     }
 }

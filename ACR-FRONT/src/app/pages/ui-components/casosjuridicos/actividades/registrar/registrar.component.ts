@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // <-- Importa CommonModule
@@ -19,20 +19,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
-// export const MY_FORMATS = {
-//   parse: {
-//     dateInput: 'DD/MM/YYYY',
-//   },
-//   display: {
-//     dateInput: 'DD/MM/YYYY',
-//     monthYearLabel: 'MMM YYYY',
-//     dateA11yLabel: 'DD/MM/YYYY',
-//     monthYearA11yLabel: 'MMMM YYYY',
-//   },
-// };
 
 @Component({
-  selector: 'app-casosjuridicos-registrar',
+  selector: 'app-casosjuridicos-actividades-registrar',
   templateUrl: './registrar.component.html',
   imports: [
     CommonModule, // <-- Añade CommonModule aquí
@@ -56,30 +45,34 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class CasosRegistrarComponent implements OnInit {
+export class ActividadesRegistrarComponent implements OnInit {
   formularioRegistro: FormGroup;
-  clientes: any[] = []; // Arreglo para almacenar los clientes obtenidos del servidor
+  trabajadores: any[] = []; // Arreglo para almacenar los clientes obtenidos del servidor
+  casoId: string | undefined = "prueba";
+
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
-    private location: Location
   ) {
     this.formularioRegistro = this.fb.group({
-      tipo: ['', Validators.required],
+      nombre: ['', Validators.required],
+      prioridad: ['', Validators.required],
       estado: ['', Validators.required],
       fecha_inicio: ['', Validators.required ],
       //this.dateValidator
       fecha_cierre: ['',Validators.required],
       descripcion: ['', Validators.required],
-      clienteId: ['', Validators.required], // Campo para almacenar el ID del cliente seleccionado
+      trabajadorId: ['', Validators.required], // Campo para almacenar el ID del cliente seleccionado
     },//{ validator: this.compareDatesValidator('fecha_inicio', 'fecha_cierre') }
     ) ;
   }
 
   ngOnInit(): void {
-    this.obtenerClientes();
+    this.casoId = this.route.snapshot.paramMap.get('id')!;
+    this.obtenerTrabajadores();
   }
 
   // dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -111,44 +104,59 @@ export class CasosRegistrarComponent implements OnInit {
   //   }
   // }
 
-  obtenerClientes() {
-    this.http.get<any[]>('http://localhost:8080/api/v1/cliente/all')
+  obtenerTrabajadores() {
+    this.http.get<any[]>('http://localhost:8080/api/v1/trabajador/all')
       .subscribe(
-        clientes => {
-          this.clientes = clientes;
-          console.log('Clientes obtenidos:', this.clientes);
+        trabajadores => {
+          this.trabajadores = trabajadores;
+          console.log('Trabajadores obtenidos:', this.trabajadores);
         },
         error => {
-          console.error('Error al obtener los clientes:', error);
+          console.error('Error al obtener los trabajadores:', error);
         }
       );
   }
 
-  registrarCaso() {
+  registrarActividad() {
     if (this.formularioRegistro.valid) {
       // Crear el objeto a enviar con el formato esperado por el backend
-      const casoData = {
-        tipo: this.formularioRegistro.value.tipo,
+      let intValue: number = 0;
+      if (this.casoId !== undefined) {
+        const parsedValue = parseInt(this.casoId, 10);
+        if (!isNaN(parsedValue)) {
+          intValue = parsedValue;
+        } else {
+          console.warn(`El valor de casoId (${this.casoId}) no es un número entero válido.`);
+        }
+      } else {
+        console.warn('El valor de casoId es undefined.');
+      }
+      const actividadData = {
+        nombre: this.formularioRegistro.value.nombre,
+        prioridad: this.formularioRegistro.value.prioridad,
         estado: this.formularioRegistro.value.estado,
         fecha_inicio: this.formularioRegistro.value.fecha_inicio,
         fecha_cierre: this.formularioRegistro.value.fecha_cierre,
         descripcion: this.formularioRegistro.value.descripcion,
-        cliente: {
-          id: this.formularioRegistro.value.clienteId, // Asumiendo que clienteId es el id del cliente seleccionado
+        trabajador: {
+          trabajadorId: this.formularioRegistro.value.trabajadorId, // Asumiendo que clienteId es el id del cliente seleccionado
+          nombres: '' // Puedes dejar esto vacío o no incluirlo si el backend no lo requiere
+        },
+        caso: {
+          id: intValue, // Asumiendo que clienteId es el id del cliente seleccionado
           nombre: '' // Puedes dejar esto vacío o no incluirlo si el backend no lo requiere
         }
       };
-      console.log('Caso registrado exitosamente:', casoData.tipo,casoData.estado,
-        casoData.fecha_inicio,casoData.fecha_cierre,casoData.fecha_cierre,casoData.fecha_cierre);
+      console.log('Actividad registrada exitosamente:', actividadData);
 
-      this.http.post<any>('http://localhost:8080/api/v1/caso/save', casoData)
+      this.http.post<any>('http://localhost:8080/api/v1/actividad/save', actividadData)
         .subscribe(response => {
-          console.log('Caso registrado exitosamente:', response);
-          alert('Caso registrado exitosamente');
-          this.router.navigate(['/ui-components/casosjuridicos']); // Navega a la ruta '/ui-components/casosjuridicos'
+          console.log('Actividad registrada exitosamente:', response);
+          alert('Actividad registrada exitosamente');
+          this.router.navigate(['/ui-components/casosjuridicos/caso', this.casoId]); // Navega a la ruta '/ui-components/casosjuridicos'
         }, error => {
-          console.error('Error al registrar el caso:', error);
-          alert('Error al registrar el caso. Por favor, intenta nuevamente.');
+          console.error('Error al registrar la actividad:', error);
+          alert('Error al registrar la actividad. Por favor, intenta nuevamente.');
         });
     } else {
       alert('Por favor, completa todos los campos del formulario correctamente.');
