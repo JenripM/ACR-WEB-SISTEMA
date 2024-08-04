@@ -18,7 +18,8 @@ export class AppBadgeComponent implements OnInit {
     apellido: '',
     correoElectronico: '',
     direccion: '',
-    telefono: ''
+    telefono: '',
+    deserto: 0
   };
   editCliente: Cliente = { ...this.newCliente };
   deleteClienteId: number | null = null;
@@ -73,7 +74,9 @@ export class AppBadgeComponent implements OnInit {
       apellido: '',
       correoElectronico: '',
       direccion: '',
-      telefono: ''
+      telefono: '',
+      deserto: 0
+
     };
   }
 

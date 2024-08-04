@@ -70,7 +70,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests() // Toda petición http debe ser autorizada
                 .requestMatchers("/api/v1/auth/**", "/api/v1/cargo/**", "/api/v1/trabajador/**", "/api/v1/cliente/**",
-                        "/api/v1/caso/**", "/api/v1/actividad/**")
+                        "/api/v1/caso/**", "/api/v1/actividad/**", "/api/v1/prediccion/**")
                 .permitAll()
                 // Agregar más URLs para gestionar sus permisos
                 .anyRequest().authenticated()

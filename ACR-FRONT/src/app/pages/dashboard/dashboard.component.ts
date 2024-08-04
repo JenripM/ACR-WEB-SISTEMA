@@ -12,10 +12,12 @@ import { DataService } from "../../data.service";
 import { CommonModule } from "@angular/common";
 import { ConvertTextToHtmlPipe } from "../../convert-text-to-html.pipe";
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from "@angular/forms";
 import { GeminiConfig } from "../../chat-form";
 import { API_KEY_CONF } from "../../../config";
@@ -26,6 +28,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSelectModule } from "@angular/material/select";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { PredictService } from "./predict.service";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+
 @Component({
   selector: "app-dashboard",
   standalone: true,
@@ -42,7 +50,11 @@ import { MatSelectModule } from "@angular/material/select";
     MatButtonModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatSelectModule
+    HttpClientModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   templateUrl: "./dashboard.component.html",
   styleUrl: "./dashboard.component.scss",
@@ -76,6 +88,8 @@ export class AppDashboardComponent {
   public bQuestions = [
    
   ];
+  tipoCasoOptions: string[] = ['Civil', 'Penal', 'Laboral', 'Mercantil', 'Administrativo', 'Ambiental'];
+  generoOptions: string[] = ['Masculino', 'Femenino'];
 
   public characterSelection = [
     {
@@ -170,4 +184,113 @@ export class AppDashboardComponent {
   ngAfterViewInit() {
     this.scrollToBottom();
   }
+  predictForm: FormGroup;
+  predictionResult: number | null = null; // Propiedad para el resultado
+
+  constructor(private fb: FormBuilder, private predictService: PredictService, private snackBar: MatSnackBar,    private http: HttpClient // Asegúrate de que HttpClient esté inyectado
+  ) {
+    this.predictForm = this.fb.group({
+      id_cliente: ['', Validators.required],
+      edad: ['', Validators.required],
+      genero: ['', Validators.required],
+      tipo_caso: ['', Validators.required],
+      fecha_inicio: ['', Validators.required],
+      fecha_cierre: ['', Validators.required],
+      ultima_actividad: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+  }
+  predictionMessage: string | null = null; // Propiedad para el mensaje
+  predictionR: number | null = null; // Propiedad para el resultado
+  onSubmit(): void {
+    if (this.predictForm.valid) {
+      const formData = this.predictForm.value;
+      const payload = {
+        id_cliente: [formData.id_cliente],
+        edad: [formData.edad],
+        genero: [formData.genero],
+        tipo_caso: [formData.tipo_caso],
+        fecha_inicio: [formData.dias_inicio],
+        fecha_cierre: [formData.dias_cierre],
+        ultima_actividad: [formData.dias_ultima_actividad]
+      };
+
+      this.predictService.predict(payload).subscribe(
+        response => {
+          // Actualiza el mensaje basado en el resultado
+          this.predictionR=response.prediction;
+          this.predictionMessage = response.prediction === 0 ? 'No desertará' : 'Desertará';
+        },
+        error => {
+          console.error('Error al hacer la predicción:', error);
+          this.predictionMessage = 'Error al realizar la predicción';
+        }
+      );
+    }
+  }
+
+  registerData(): void {
+      const formData = this.predictForm.value;
+      const payload = {
+        idCliente: formData.id_cliente,
+        edad: formData.edad,
+        genero: formData.genero,
+        tipoCaso: formData.tipo_caso,
+        fechaInicio: formData.fecha_inicio,
+        fechaCierre: formData.fecha_cierre,
+        ultimaActividad: formData.ultima_actividad,
+        prediccion: this.predictionR // Incluye el resultado de la predicción en el payload
+      };
+
+      this.http.post<any>('http://localhost:8080/api/v1/prediccion/save', payload)
+        .subscribe(
+          response => {
+            console.log('Datos registrados exitosamente:', response);
+            this.snackBar.open('Datos registrados exitosamente', 'Cerrar', {
+              duration: 3000,
+            });
+          },
+          error => {
+            console.error('Error al registrar los datos:', error);
+            this.snackBar.open('Error al registrar los datos. Por favor, intenta nuevamente.', 'Cerrar', {
+              duration: 3000,
+            });
+          }
+        );
+ 
+  }
+
+  
+  registerData2(): void {
+    // Datos de prueba para enviar a la API
+    const payload = {
+      idCliente: 1423, // Valor de prueba
+      edad: 25, // Valor de prueba
+      genero: 'Masculino', // Valor de prueba
+      tipoCaso: 'Tipo de Caso Ejemplo', // Valor de prueba
+      fechaInicio: '2024-01-01', // Valor de prueba
+      fechaCierre: '2024-12-31', // Valor de prueba
+      ultimaActividad: '2024-08-04', // Valor de prueba
+      prediccion: 1 // Valor de prueba para la predicción
+    };
+  
+    this.http.post<any>('http://localhost:8080/api/v1/prediccion/save', payload)
+      .subscribe(
+        response => {
+          console.log('Datos registrados exitosamente:', response);
+          this.snackBar.open('Datos registrados exitosamente', 'Cerrar', {
+            duration: 3000,
+          });
+        },
+        error => {
+          console.error('Error al registrar los datos:', error);
+          this.snackBar.open('Error al registrar los datos. Por favor, intenta nuevamente.', 'Cerrar', {
+            duration: 3000,
+          });
+        }
+      );
+  }
+  
 }
