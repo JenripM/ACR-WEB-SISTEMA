@@ -9,6 +9,16 @@
           <!-- Contenido del mat-card en la parte inferior -->
           <h1>Mat Card 3</h1>
           <p>Contenido del mat-card en la parte inferior.</p>
+          <div id="chart">
+            <apx-chart 
+              [series]="chartOptions.series" 
+              [chart]="chartOptions.chart" 
+              [title]="chartOptions.title">
+            </apx-chart>
+          </div>
+          
+          
+          
         </mat-card-content>
       </mat-card>
     </div>

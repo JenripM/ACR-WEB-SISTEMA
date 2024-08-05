@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  OnInit,
   TemplateRef,
   ViewChild,
   inject,
@@ -29,11 +30,17 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSelectModule } from "@angular/material/select";
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { PredictService } from "./predict.service";
+import { ClienteData, PredictService } from "./predict.service";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-
+import { Chart } from "chart.js";
+import { ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitle, ApexXAxis, NgApexchartsModule } from "ng-apexcharts";
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  title: ApexTitleSubtitle;
+};
 @Component({
   selector: "app-dashboard",
   standalone: true,
@@ -54,7 +61,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     MatSnackBarModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgApexchartsModule
   ],
   templateUrl: "./dashboard.component.html",
   styleUrl: "./dashboard.component.scss",
@@ -67,7 +75,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     ]),
   ],
 })
-export class AppDashboardComponent {
+export class AppDashboardComponent  implements OnInit {
   @ViewChild("messagesContainer") private messagesContainer!: ElementRef;
   private dataService = inject(DataService);
   public messagesHistory: { role: string; parts: string }[] = [];
@@ -198,10 +206,19 @@ export class AppDashboardComponent {
       fecha_cierre: ['', Validators.required],
       ultima_actividad: ['', Validators.required]
     });
+    this.chartOptions = {
+      series: [0, 0], // Inicialmente sin datos
+      chart: {
+        type: 'pie',
+        height: 350
+      },
+      title: {
+        text: 'Distribución de Predicciones'
+      }
+    };
   }
 
-  ngOnInit(): void {
-  }
+
   predictionMessage: string | null = null; // Propiedad para el mensaje
   predictionR: number | null = null; // Propiedad para el resultado
   onSubmit(): void {
@@ -292,5 +309,26 @@ export class AppDashboardComponent {
         }
       );
   }
-  
+
+  chart: any;
+
+  ngOnInit(): void {
+    this.fetchData();
+
+  }
+  public chartOptions: ChartOptions;
+  fetchData() {
+    this.http.get<any[]>('http://localhost:8080/api/v1/prediccion/all').subscribe(data => {
+      // Contar las predicciones de 1 y 0
+      const countPred1 = data.filter(item => item.prediccion === 1).length;
+      const countPred0 = data.filter(item => item.prediccion === 0).length;
+
+      // Actualizar las opciones del gráfico con los datos obtenidos
+      this.chartOptions = {
+        ...this.chartOptions,
+        series: [countPred0, countPred1],
+      };
+    });
+  }
+
 }
