@@ -35,11 +35,14 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { Chart } from "chart.js";
-import { ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitle, ApexXAxis, NgApexchartsModule } from "ng-apexcharts";
+import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexResponsive, ApexTitleSubtitle, ApexXAxis, NgApexchartsModule } from "ng-apexcharts";
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
+  labels: string[];
   title: ApexTitleSubtitle;
+  responsive: ApexResponsive[];
+  dataLabels: ApexDataLabels;
 };
 @Component({
   selector: "app-dashboard",
@@ -214,6 +217,23 @@ export class AppDashboardComponent  implements OnInit {
       },
       title: {
         text: 'Distribución de Predicciones'
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      ],
+      labels: ['No Deserta', 'Si Deserta'], // Etiquetas para las leyendas
+      dataLabels: {
+        enabled: true
       }
     };
   }

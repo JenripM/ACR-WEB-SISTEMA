@@ -3,24 +3,32 @@
 <div class="container">
   <div class="row">
     <!-- Mat-card en la parte inferior -->
-    <div class="col-lg-12">
+    <div class="col-lg-6">
       <mat-card class="cardWithShadow">
         <mat-card-content class="p-24">
           <!-- Contenido del mat-card en la parte inferior -->
-          <h1>Mat Card 3</h1>
-          <p>Contenido del mat-card en la parte inferior.</p>
+          
           <div id="chart">
             <apx-chart 
               [series]="chartOptions.series" 
               [chart]="chartOptions.chart" 
-              [title]="chartOptions.title">
+              [labels]="chartOptions.labels"
+              [title]="chartOptions.title"
+              [responsive]="chartOptions.responsive"
+              [dataLabels]="chartOptions.dataLabels">
             </apx-chart>
           </div>
           
           
-          
         </mat-card-content>
       </mat-card>
+    </div>
+
+    <div class="col-lg-6">
+      <mat-card class="cardWithShadow">
+        <mat-card-content class="p-24">
+        </mat-card-content>
+      </mat-card> 
     </div>
   </div>
   <div class="row">
