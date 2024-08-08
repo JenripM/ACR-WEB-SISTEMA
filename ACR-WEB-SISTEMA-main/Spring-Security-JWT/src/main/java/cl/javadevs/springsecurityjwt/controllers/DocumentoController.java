@@ -1,6 +1,7 @@
 package cl.javadevs.springsecurityjwt.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -23,7 +24,7 @@ import cl.javadevs.springsecurityjwt.services.DocumentoService;
 import jakarta.annotation.Resource;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200") // Especifica el origen frontend
 @RequestMapping("/api/v1/documento")
 public class DocumentoController {
 
@@ -49,7 +50,11 @@ public class DocumentoController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<Documento>> getAllDocumentos() {
+        List<Documento> Documentos = documentoService.getAllDocumentos();
+        return ResponseEntity.ok(Documentos);
+    }
     /**
      * Actualiza un documento existente.
      * @param id ID del documento a actualizar.

@@ -1,21 +1,19 @@
 package cl.javadevs.springsecurityjwt.services;
 
-import cl.javadevs.springsecurityjwt.models.Trabajador;
-import cl.javadevs.springsecurityjwt.repositories.TrabajadorRepository;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import cl.javadevs.springsecurityjwt.models.Trabajador;
+import cl.javadevs.springsecurityjwt.repositories.TrabajadorRepository;
 
 @Service
 public class TrabajadorService {
 
     @Autowired
     private TrabajadorRepository trabajadorRepository;
-
-
 
     public Trabajador addTrabajador(Trabajador trabajador) {
         return trabajadorRepository.save(trabajador);

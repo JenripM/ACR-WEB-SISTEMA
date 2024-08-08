@@ -36,6 +36,7 @@ import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 import { UsuarioRegistrarComponent } from './roles-usuario/registrar/registrar.component';
 import { UsuarioEliminarComponent } from './roles-usuario/eliminar/eliminar.component';
 import { UsuarioEditarComponent } from './roles-usuario/editar/editar.component';
+import { AppDocumentosComponent } from './documentos/documentos.component';
 
 @NgModule({
   imports: [
@@ -71,7 +72,7 @@ import { UsuarioEditarComponent } from './roles-usuario/editar/editar.component'
     AppTrabajadoresComponent,
     CasosjuridicosComponent,
     RolesUsuarioComponent,
-
+    AppDocumentosComponent,
 
   ],
 })

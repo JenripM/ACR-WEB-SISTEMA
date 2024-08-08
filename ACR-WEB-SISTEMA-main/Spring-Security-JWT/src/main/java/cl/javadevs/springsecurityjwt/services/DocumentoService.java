@@ -3,6 +3,7 @@ package cl.javadevs.springsecurityjwt.services;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,9 @@ public class DocumentoService {
 
         return documentoRepository.save(documento);
     }
-
+    public List<Documento> getAllDocumentos() {
+        return documentoRepository.findAll();
+    }
     /**
      * Actualiza un documento existente, reemplazando el archivo y los campos especificados.
      * @param id ID del documento a actualizar.

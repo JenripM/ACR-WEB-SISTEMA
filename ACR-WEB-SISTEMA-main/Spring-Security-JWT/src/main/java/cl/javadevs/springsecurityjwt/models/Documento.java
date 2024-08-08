@@ -1,21 +1,22 @@
 package cl.javadevs.springsecurityjwt.models;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.Table;
+@Entity
+@Table(name = "DOCUMENTO")
 public class Documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDocumento;
 
-    private String tipo;  // Aquí se describe el tipo de documento (por ejemplo, "demanda", "notificación")
-
-    @Lob
-    private byte[] datos;  // Almacena el contenido del archivo
+    private String tipo;
+    private String nombreArchivo; // Nombre del archivo guardado
+    private byte[] datos;
 
     @ManyToOne
     @JoinColumn(name = "caso_id", nullable = false)
@@ -38,6 +39,13 @@ public class Documento {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
     }
 
     public byte[] getDatos() {
