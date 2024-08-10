@@ -221,7 +221,18 @@ export class AppDashboardComponent  implements OnInit {
         return acc;
       }, {});
       response = `Casos por género: ${JSON.stringify(casosPorGenero, null, 2)}`;
-    } else if (message.toLowerCase().includes('casos por tipo de caso')) {
+    } else if (message.toLowerCase().includes('casos por rango de edad')) {
+      const casosPorRangoEdad = this.apiData.reduce((acc: any, item: any) => {
+        if (item.edad < 20) acc['Menores de 20'] = (acc['Menores de 20'] || 0) + 1;
+        else if (item.edad >= 20 && item.edad < 30) acc['20-29'] = (acc['20-29'] || 0) + 1;
+        else if (item.edad >= 30 && item.edad < 40) acc['30-39'] = (acc['30-39'] || 0) + 1;
+        else if (item.edad >= 40 && item.edad < 50) acc['40-49'] = (acc['40-49'] || 0) + 1;
+        else acc['50 y más'] = (acc['50 y más'] || 0) + 1;
+        return acc;
+      }, {});
+      response = `Casos por rango de edad: ${JSON.stringify(casosPorRangoEdad, null, 2)}`;
+    }
+     else if (message.toLowerCase().includes('casos por tipo de caso')) {
       // Contar casos por tipo de caso
       const casosPorTipo = this.apiData.reduce((acc: any, item: any) => {
         acc[item.tipoCaso] = (acc[item.tipoCaso] || 0) + 1;
