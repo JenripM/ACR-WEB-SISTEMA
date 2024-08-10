@@ -23,10 +23,7 @@ interface Content {
 })
 export class DataService {
   generateContentWithGeminiPro(
-    message: string,
-    history: { role: string; parts: string }[],
-    geminiConfig: GeminiConfig
-  ) {
+message: string, history: { role: string; parts: string; }[], geminiConfig: GeminiConfig, processedData: any[]  ) {
     const MODEL_NAME = geminiConfig.model;
     const API_KEY = geminiConfig.apiKey || API_KEY_CONF;
 

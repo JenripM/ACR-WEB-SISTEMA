@@ -36,6 +36,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { Chart } from "chart.js";
 import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexResponsive, ApexTitleSubtitle, ApexXAxis, NgApexchartsModule } from "ng-apexcharts";
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -135,54 +136,99 @@ export class AppDashboardComponent  implements OnInit {
     bot: new FormControl(this.characterSelection[0]),
     model: new FormControl(this.modelOptions[0].value),
   });
-
+  apiData: any[] = []; // Para almacenar los datos obtenidos de la API
   sendMessage(message: string) {
     if (!message || this.loading) return;
     setTimeout(() => this.scrollToBottom(), 0);
     this.loading = true;
+
+    // Agregar el mensaje del usuario al historial
     this.messagesHistory.push(
       {
-        role: "user",
+        role: 'user',
         parts: message,
       },
       {
-        role: "model",
-        parts: "",
+        role: 'model',
+        parts: '',
       }
     );
-    this.dataService
-      .generateContentWithGeminiPro(
-        message,
-        this.messagesHistory,
-        this.chatForm.value as GeminiConfig
-      )
-      .subscribe({
-        next: (res: any) => {
+
+    // Si los datos no están cargados, cargarlos desde la API
+    if (this.apiData.length === 0) {
+      this.predictService.getPredicciones().subscribe({
+        next: (data: any) => {
           this.loading = false;
-          this.userMessage = null;
-          this.messagesHistory = this.messagesHistory.slice(0, -2);
-          this.messagesHistory.push(
-            {
-              role: "user",
-              parts: message,
-            },
-            {
-              role: "model",
-              parts: res,
-            }
-          );
-          setTimeout(() => this.scrollToBottom(), 0);
+          this.apiData = data; // Guardar los datos en la variable
+          this.processMessage(message);
         },
         error: (error) => {
           this.loading = false;
-          console.error("Error generating content:", error);
+          console.error('Error fetching data:', error);
           this.messagesHistory.push({
-            role: "model",
-            parts: "Lo Siento, Intenta nuevamente.",
+            role: 'model',
+            parts: 'Lo siento, hubo un problema al obtener los datos. Intenta nuevamente.',
           });
           setTimeout(() => this.scrollToBottom(), 0);
         },
       });
+    } else {
+      // Si los datos ya están cargados, procesar el mensaje directamente
+      this.processMessage(message);
+    }
+  }
+
+  processMessage(message: string) {
+    // Procesar el mensaje basado en los datos de la API
+    let response: string;
+
+    // Preguntas específicas
+    if (message.toLowerCase().includes('casos mercantiles más recientes')) {
+      // Filtrar y ordenar los datos de la API
+      const casosMercantiles = this.apiData.filter((item: any) => item.tipoCaso === 'Mercantil');
+      const casosOrdenados = casosMercantiles.sort((a: any, b: any) => b.prediccion - a.prediccion);
+      response = `Datos procesados: ${JSON.stringify(casosOrdenados, null, 2)}`;
+    } else if (message.toLowerCase().includes('caso con mayor prediccion')) {
+      // Encontrar el caso con la mayor predicción
+      const casoMaxPrediccion = this.apiData.reduce((max: any, item: any) => (item.prediccion > max.prediccion ? item : max), this.apiData[0]);
+      response = `Caso con mayor predicción: ${JSON.stringify(casoMaxPrediccion, null, 2)}`;
+    } else if (message.toLowerCase().includes('total de casos')) {
+      // Contar el número total de casos
+      const totalCasos = this.apiData.length;
+      response = `Total de casos: ${totalCasos}`;
+    } else if (message.toLowerCase().includes('casos por genero')) {
+      // Contar casos por género
+      const casosPorGenero = this.apiData.reduce((acc: any, item: any) => {
+        acc[item.genero] = (acc[item.genero] || 0) + 1;
+        return acc;
+      }, {});
+      response = `Casos por género: ${JSON.stringify(casosPorGenero, null, 2)}`;
+    } else if (message.toLowerCase().includes('casos por tipo de caso')) {
+      // Contar casos por tipo de caso
+      const casosPorTipo = this.apiData.reduce((acc: any, item: any) => {
+        acc[item.tipoCaso] = (acc[item.tipoCaso] || 0) + 1;
+        return acc;
+      }, {});
+      response = `Casos por tipo de caso: ${JSON.stringify(casosPorTipo, null, 2)}`;
+    } else {
+      response = 'No entiendo la pregunta. Por favor, pregunta algo sobre los casos o los datos disponibles.';
+    }
+
+    // Agregar la respuesta al historial de mensajes
+    this.messagesHistory = this.messagesHistory.slice(0, -2);
+    this.messagesHistory.push(
+      {
+        role: 'user',
+        parts: message,
+      },
+      {
+        role: 'model',
+        parts: response,
+      }
+    );
+
+    this.loading = false;
+    setTimeout(() => this.scrollToBottom(), 0);
   }
 
   scrollToBottom(): void {

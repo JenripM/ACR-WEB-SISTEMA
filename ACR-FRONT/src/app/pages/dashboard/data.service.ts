@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'URL_DE_TU_API'; // Reemplaza con la URL de tu API
 
-  constructor(private http: HttpClient) { }
 
-  getData(): Observable<any> {
+  private apiUrl = 'http://localhost:8080/api/v1/prediccion/all';
+
+  constructor(private http: HttpClient) {}
+
+  getPredicciones(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
 }

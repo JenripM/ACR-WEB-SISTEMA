@@ -43,4 +43,12 @@ export class PredictService {
     // Para obtener datos reales de la API, descomentar la siguiente línea
     // return this.http.get<ClienteData[]>(this.apiUrl);
   }
+
+
+  private apiUrl3 = 'http://localhost:8080/api/v1/prediccion/all';
+
+
+  getPredicciones(): Observable<any> {
+    return this.http.get<any>(this.apiUrl3);
+  }
 }
