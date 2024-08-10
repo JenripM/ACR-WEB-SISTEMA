@@ -183,12 +183,30 @@ export class AppDashboardComponent  implements OnInit {
     let response: string;
 
     // Preguntas específicas
-    if (message.toLowerCase().includes('casos mercantiles más recientes')) {
+    if (message.toLowerCase().includes('casos civiles mas recientes')) {
+      // Filtrar y ordenar los datos de la API
+      const casosMercantiles = this.apiData.filter((item: any) => item.tipoCaso === 'Civil');
+      const casosOrdenados = casosMercantiles.sort((a: any, b: any) => b.prediccion - a.prediccion);
+      response = `Datos procesados: ${JSON.stringify(casosOrdenados, null, 2)}`;
+    }
+    else if (message.toLowerCase().includes('casos penales mas recientes')) {
+      // Filtrar y ordenar los datos de la API
+      const casosMercantiles = this.apiData.filter((item: any) => item.tipoCaso === 'Penal');
+      const casosOrdenados = casosMercantiles.sort((a: any, b: any) => b.prediccion - a.prediccion);
+      response = `Datos procesados: ${JSON.stringify(casosOrdenados, null, 2)}`;
+     }
+     else if (message.toLowerCase().includes('casos mercantiles mas recientes')) {
       // Filtrar y ordenar los datos de la API
       const casosMercantiles = this.apiData.filter((item: any) => item.tipoCaso === 'Mercantil');
       const casosOrdenados = casosMercantiles.sort((a: any, b: any) => b.prediccion - a.prediccion);
       response = `Datos procesados: ${JSON.stringify(casosOrdenados, null, 2)}`;
-    } else if (message.toLowerCase().includes('caso con mayor prediccion')) {
+     } 
+     else if (message.toLowerCase().includes('casos administrativos mas recientes')) {
+      // Filtrar y ordenar los datos de la API
+      const casosMercantiles = this.apiData.filter((item: any) => item.tipoCaso === 'Administrativo');
+      const casosOrdenados = casosMercantiles.sort((a: any, b: any) => b.prediccion - a.prediccion);
+      response = `Datos procesados: ${JSON.stringify(casosOrdenados, null, 2)}`;
+     }  else if (message.toLowerCase().includes('caso con mayor prediccion')) {
       // Encontrar el caso con la mayor predicción
       const casoMaxPrediccion = this.apiData.reduce((max: any, item: any) => (item.prediccion > max.prediccion ? item : max), this.apiData[0]);
       response = `Caso con mayor predicción: ${JSON.stringify(casoMaxPrediccion, null, 2)}`;
