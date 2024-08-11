@@ -32,6 +32,7 @@ export class RegistrarComponent implements OnInit {
   formularioDocumento: FormGroup;
   casos: any[] = [];
   nombreArchivo: string = '';
+  
 
   constructor(
     private http: HttpClient, 
