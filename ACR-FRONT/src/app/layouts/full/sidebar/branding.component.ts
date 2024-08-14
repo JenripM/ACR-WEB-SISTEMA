@@ -4,12 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-branding',
   template: `
     <div class="branding">
-      <a href="/">
-        <img
-          src="./assets/images/logos/dark-logo.svg"
-          class="align-middle m-2"
-          alt="logo"
-        />
+      <a href="/dashboard">
+       <h1 class="text-white text-center" style="font-size: 16px;">ROSALES Y ASOCIADOS</h1>
       </a>
     </div>
   `,
