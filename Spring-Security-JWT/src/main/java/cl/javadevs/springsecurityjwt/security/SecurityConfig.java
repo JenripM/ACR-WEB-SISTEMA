@@ -15,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 // Le indica al contenedor de spring que esta es una clase de seguridad al
@@ -59,27 +61,43 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .exceptionHandling() // Permitimos el manejo de excepciones
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint) // Nos establece un punto de entrada
-                                                                       // personalizado de autenticación para el manejo
-                                                                       // de autenticaciones no autorizadas
-                .and()
-                .sessionManagement() // Permite la gestión de sessiones
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests() // Toda petición http debe ser autorizada
-                .requestMatchers("/api/v1/auth/**", "/api/v1/cargo/**", "/api/v1/trabajador/**", "/api/v1/cliente/**",
-                        "/api/v1/caso/**", "/api/v1/actividad/**", "/api/v1/prediccion/**","/api/v1/documento/**" )
-                .permitAll()
-                // Agregar más URLs para gestionar sus permisos
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
+            .csrf().disable()
+            .cors() // Asegúrate de que CORS esté habilitado aquí
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authorizeHttpRequests()
+            .requestMatchers("/api/v1/auth/**", "/api/v1/cargo/**", "/api/v1/trabajador/**", "/api/v1/cliente/**",
+                    "/api/v1/caso/**", "/api/v1/actividad/**", "/api/v1/prediccion/**")
+            .permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .httpBasic();
+    
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    
         return http.build();
     }
-
+    
+     @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("https://front-estudiojuridico.vercel.app")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+            }
+     
+     
+        };
+    }
     private Customizer<HttpBasicConfigurer<HttpSecurity>> withDefaults() {
         // TODO Auto-generated method stub
         return null;
