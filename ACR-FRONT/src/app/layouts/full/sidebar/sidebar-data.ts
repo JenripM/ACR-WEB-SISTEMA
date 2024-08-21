@@ -27,11 +27,11 @@ export const navItems: NavItem[] = [
     iconName: 'list',
     route: '/ui-components/casosjuridicos',
   },
-  {
-    displayName: 'Asignacion de Tareas',
-    iconName: 'layout-navbar-expand',
-    route: '/ui-components/asignaciontareas',
-  },
+  // {
+  //   displayName: 'Asignacion de Tareas',
+  //   iconName: 'layout-navbar-expand',
+  //   route: '/ui-components/asignaciontareas',
+  // },
   {
     displayName: 'Gestion de Documentos',
     iconName: 'tooltip',
@@ -51,11 +51,11 @@ export const navItems: NavItem[] = [
     route: '/authentication/register',
   },*/
  
-  {
-    displayName: 'Correspondencia',
-    iconName: 'mood-smile',
-    route: '/ui-components/correspondencia',
-  },
+  // {
+  //   displayName: 'Correspondencia',
+  //   iconName: 'mood-smile',
+  //   route: '/ui-components/correspondencia',
+  // },
   {
     navCap: '',
   },

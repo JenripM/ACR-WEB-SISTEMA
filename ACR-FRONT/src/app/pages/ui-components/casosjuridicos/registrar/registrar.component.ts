@@ -69,47 +69,45 @@ export class CasosRegistrarComponent implements OnInit {
     this.formularioRegistro = this.fb.group({
       tipo: ['', Validators.required],
       estado: ['', Validators.required],
-      fecha_inicio: ['', Validators.required ],
-      //this.dateValidator
-      fecha_cierre: ['',Validators.required],
+      fecha_inicio: ['', [Validators.required, this.dateValidator]],
+      fecha_cierre: ['', Validators.required],
       descripcion: ['', Validators.required],
       clienteId: ['', Validators.required], // Campo para almacenar el ID del cliente seleccionado
-    },//{ validator: this.compareDatesValidator('fecha_inicio', 'fecha_cierre') }
-    ) ;
+    }, { validator: this.compareDatesValidator('fecha_inicio', 'fecha_cierre') });
   }
 
   ngOnInit(): void {
     this.obtenerClientes();
   }
 
-  // dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
-  //   if (control.value) {
-  //     const enteredDate = new Date(control.value);
-  //     const currentDate = new Date();
+  dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    if (control.value) {
+      const enteredDate = new Date(control.value);
+      const currentDate = new Date();
 
-  //     if (enteredDate < currentDate) {
-  //       return { 'invalidDate': true }; // Fecha no válida
-  //     }
-  //   }
-  //   return null; // Fecha válida
-  // }
+      if (enteredDate < currentDate) {
+        return { 'invalidDate': true }; // Fecha no válida
+      }
+    }
+    return null; // Fecha válida
+  }
 
-  // compareDatesValidator(controlName: string, compareToControlName: string): ValidatorFn {
-  //   return (formGroup: AbstractControl): ValidationErrors | null => {
-  //     const control = formGroup.get(controlName);
-  //     const compareToControl = formGroup.get(compareToControlName);
+  compareDatesValidator(controlName: string, compareToControlName: string): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const control = formGroup.get(controlName);
+      const compareToControl = formGroup.get(compareToControlName);
 
-  //     if (control && compareToControl && control.value && compareToControl.value) {
-  //       const controlDate = new Date(control.value);
-  //       const compareToControlDate = new Date(compareToControl.value);
+      if (control && compareToControl && control.value && compareToControl.value) {
+        const controlDate = new Date(control.value);
+        const compareToControlDate = new Date(compareToControl.value);
 
-  //       if (controlDate > compareToControlDate) {
-  //         return { 'invalidDateRange': true };
-  //       }
-  //     }
-  //     return null;
-  //   }
-  // }
+        if (controlDate > compareToControlDate) {
+          return { 'invalidDateRange': true };
+        }
+      }
+      return null;
+    }
+  }
 
   obtenerClientes() {
     this.http.get<any[]>('http://localhost:8080/api/v1/cliente/all')
@@ -139,7 +137,8 @@ export class CasosRegistrarComponent implements OnInit {
         }
       };
       console.log('Caso registrado exitosamente:', casoData.tipo,casoData.estado,
-        casoData.fecha_inicio,casoData.fecha_cierre,casoData.fecha_cierre,casoData.fecha_cierre);
+        casoData.fecha_inicio,casoData.fecha_cierre,);
+        
 
       this.http.post<any>('http://localhost:8080/api/v1/caso/save', casoData)
         .subscribe(response => {

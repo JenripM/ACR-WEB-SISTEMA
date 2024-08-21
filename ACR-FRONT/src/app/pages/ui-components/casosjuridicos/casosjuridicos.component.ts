@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import * as moment from 'moment-timezone';
 
 export interface Caso {
   id: number;
@@ -39,6 +40,9 @@ export class CasosjuridicosComponent  implements OnInit{
 
   ngOnInit(): void {
     this.obtenerCasos();
+  }
+  convertToLocaleDate(date: string): string {
+    return moment(date).tz('Europe/Madrid').format('DD/MM/YYYY'); // Ajusta la zona horaria según necesites
   }
 
   formatDate(dateTimeString: string) {
