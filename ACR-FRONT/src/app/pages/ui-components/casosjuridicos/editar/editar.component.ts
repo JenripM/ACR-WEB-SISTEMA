@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-casosjuridicos-editar',
@@ -60,15 +61,51 @@ export class CasosEditarComponent implements OnInit {
     this.formularioEdicion = this.fb.group({
       tipo: ['', Validators.required],
       estado: ['', Validators.required],
-      fecha_inicio: ['', Validators.required ],
+      fecha_inicio: ['', [Validators.required, this.dateValidator] ],
       //this.dateValidator
-      fecha_cierre: ['',Validators.required],
+      fecha_cierre: ['',[Validators.required, this.dateValidator]],
       descripcion: ['', Validators.required],
       clienteId: ['', Validators.required], // Campo para almacenar el ID del cliente seleccionado
-    },//{ validator: this.compareDatesValidator('fecha_inicio', 'fecha_cierre') }
+    },{ validator: this.compareDatesValidator('fecha_inicio', 'fecha_cierre') }
     ) ;
   }
 
+  convertToLocaleDate(date: string): string {
+    return moment(date).tz('Europe/Madrid').format('DD/MM/YYYY'); // Ajusta la zona horaria según necesites
+  }
+
+  dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    if (control.value) {
+        const enteredDate = new Date(this.convertToLocaleDate(control.value));
+        const currentDate = new Date();
+
+        // Restablecer la hora, minutos y segundos de la fecha actual a 0
+        currentDate.setHours(0, 0, 0, 0);
+
+        // Comprobar si la fecha ingresada es anterior a la fecha actual
+        if (enteredDate < currentDate) {
+            return { 'invalidDate': true }; // La fecha ingresada es anterior a hoy
+        }
+    }
+    return null; // La fecha ingresada es hoy o después
+  }
+
+  compareDatesValidator(controlName: string, compareToControlName: string): ValidatorFn {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const control = formGroup.get(controlName);
+      const compareToControl = formGroup.get(compareToControlName);
+
+      if (control && compareToControl && control.value && compareToControl.value) {
+        const controlDate = new Date(control.value);
+        const compareToControlDate = new Date(compareToControl.value);
+
+        if (controlDate > compareToControlDate) {
+          return { 'invalidDateRange': true };
+        }
+      }
+      return null;
+    }
+  }
 
 
   ngOnInit(): void {
@@ -92,9 +129,9 @@ export class CasosEditarComponent implements OnInit {
 
   formatDate(dateTimeString: string) {
     const date = new Date(dateTimeString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 

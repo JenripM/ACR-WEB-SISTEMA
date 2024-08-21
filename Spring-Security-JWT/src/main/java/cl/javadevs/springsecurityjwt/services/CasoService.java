@@ -13,7 +13,6 @@ public class CasoService {
 
     @Autowired
     private CasoRepository casoRepository;
-
   
     public Caso addCaso(Caso caso) {
         return casoRepository.save(caso);

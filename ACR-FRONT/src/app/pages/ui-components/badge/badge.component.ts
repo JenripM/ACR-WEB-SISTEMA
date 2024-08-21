@@ -12,13 +12,46 @@ export class AppBadgeComponent implements OnInit {
   isEditClienteModalVisible = false;
   isDeleteClienteModalVisible = false;
 
+  
+
+  validateNombre(): boolean {
+    const nombre = this.newCliente.nombre;
+    const pattern = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
+    return pattern.test(nombre);
+  }
+
+  validateApellido(): boolean {
+    const apellido = this.newCliente.apellido;
+    const pattern = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
+    return pattern.test(apellido);
+  }
+
+  validateDireccion(): boolean {
+    const direccion = this.newCliente.direccion;
+    const pattern = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]*$/;
+    return pattern.test(direccion);
+  }
+
+  validateEmail(): boolean {
+    const email = this.newCliente.correoElectronico;
+    const pattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return pattern.test(email);
+  }
+
+  validateNumero(): boolean {
+    const numero = this.newCliente.telefono;
+    const pattern = /^\d{9}$/;
+    return pattern.test(numero);
+  }
+
   newCliente: Cliente = {
     id: 0,
     nombre: '',
     apellido: '',
     correoElectronico: '',
     direccion: '',
-    telefono: ''
+    telefono: '',
+    deserto: 0
   };
   editCliente: Cliente = { ...this.newCliente };
   deleteClienteId: number | null = null;
@@ -53,17 +86,23 @@ export class AppBadgeComponent implements OnInit {
     }
   }
 
+  
   addCliente(): void {
-    this.clienteService.createCliente(this.newCliente).subscribe(
-      (data: Cliente) => {
-        this.clientes.push(data);
-        this.closeNewClienteModal();
-        this.resetNewCliente();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (this.validateNombre() && this.validateApellido() && this.validateDireccion() && this.validateEmail() && this.validateNumero()) {
+      this.clienteService.createCliente(this.newCliente).subscribe(
+        (data: Cliente) => {
+          this.clientes.push(data);
+          this.closeNewClienteModal();
+          this.resetNewCliente();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      console.log('Error: El nombre no es válido');
+    }
+   
   }
 
   resetNewCliente(): void {
@@ -73,7 +112,9 @@ export class AppBadgeComponent implements OnInit {
       apellido: '',
       correoElectronico: '',
       direccion: '',
-      telefono: ''
+      telefono: '',
+      deserto: 0
+
     };
   }
 

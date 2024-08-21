@@ -23,9 +23,12 @@ import { UsuarioEliminarComponent } from './roles-usuario/eliminar/eliminar.comp
 import { UsuarioEditarComponent } from './roles-usuario/editar/editar.component';
 import { CasosjuridicosComponent } from './casosjuridicos/casosjuridicos.component';
 import { AsignaciontareasComponent } from './asignaciontareas/asignaciontareas.component';
-import { DocumentosComponent } from './documentos/documentos.component';
+import { AppDocumentosComponent } from './documentos/documentos.component';
 import { CorrespondenciaComponent } from './correspondencia/correspondencia.component';
 import { CasosEliminarComponent } from './casosjuridicos/eliminar/eliminar.component';
+import { RegistrarComponent } from './documentos/registrar/registrar.component';
+import { DocumentosEditarComponent } from './documentos/editar/documentos-editar/documentos-editar.component';
+import { DocumentosEliminarComponent } from './documentos/eliminar/documentos-eliminar/documentos-eliminar.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -93,7 +96,19 @@ export const UiComponentsRoutes: Routes = [
       },
       {
         path: 'documentos',
-        component: DocumentosComponent,
+        component: AppDocumentosComponent,
+      },
+      {
+        path: 'documentos/registrar',
+        component: RegistrarComponent,
+      },
+      {
+        path: 'documentos/editar/:id',
+        component: DocumentosEditarComponent,
+      },
+      {
+        path: 'documentos/eliminar/:id',
+        component: DocumentosEliminarComponent,
       },
       {
         path: 'correspondencia',

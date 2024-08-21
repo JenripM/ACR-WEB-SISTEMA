@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import * as moment from 'moment';
 
 // export const MY_FORMATS = {
 //   parse: {
@@ -79,17 +80,24 @@ export class CasosRegistrarComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerClientes();
   }
+  convertToLocaleDate(date: string): string {
+    return moment(date).tz('Europe/Madrid').format('DD/MM/YYYY'); // Ajusta la zona horaria según necesites
+  }
 
   dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
     if (control.value) {
-      const enteredDate = new Date(control.value);
-      const currentDate = new Date();
+        const enteredDate = new Date(this.convertToLocaleDate(control.value));
+        const currentDate = new Date();
 
-      if (enteredDate < currentDate) {
-        return { 'invalidDate': true }; // Fecha no válida
-      }
+        // Restablecer la hora, minutos y segundos de la fecha actual a 0
+        currentDate.setHours(0, 0, 0, 0);
+
+        // Comprobar si la fecha ingresada es anterior a la fecha actual
+        if (enteredDate < currentDate) {
+            return { 'invalidDate': true }; // La fecha ingresada es anterior a hoy
+        }
     }
-    return null; // Fecha válida
+    return null; // La fecha ingresada es hoy o después
   }
 
   compareDatesValidator(controlName: string, compareToControlName: string): ValidatorFn {

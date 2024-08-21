@@ -13,19 +13,20 @@ public class Cliente {
     private String direccion;
     private String telefono;
     private String correoElectronico;
-    
+    private int  deserto;
     // Constructor vacío (necesario para JPA)
     public Cliente() {
     }
 
     // Constructor con todos los atributos
-    public Cliente(int id, String nombre, String apellido, String direccion, String telefono, String correoElectronico) {
+    public Cliente(int id, String nombre, String apellido, String direccion, String telefono, String correoElectronico, int deserto) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
+        this.deserto = deserto;
     }
 
     // Getters y setters (importantes para JPA)
@@ -75,5 +76,13 @@ public class Cliente {
 
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
+    }
+
+    public int getDeserto() {
+        return deserto;
+    }
+
+    public void setDeserto(int deserto) {
+        this.deserto = deserto;
     }
 }

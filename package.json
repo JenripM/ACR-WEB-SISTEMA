@@ -1,0 +1,11 @@
+{
+  "name": "acr-web-sistema",
+  "version": "1.0.0",
+  "description": "Sistemas de Gestion de Clientes y Procesos Juridicos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
