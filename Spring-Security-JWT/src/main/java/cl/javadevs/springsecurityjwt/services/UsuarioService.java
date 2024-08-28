@@ -9,6 +9,7 @@ import cl.javadevs.springsecurityjwt.repositories.IRolesRepository;
 import cl.javadevs.springsecurityjwt.repositories.IUsuariosRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,9 @@ import java.util.stream.Collectors;
 @Service
 public class UsuarioService {
 
-    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder; // Inyecta el PasswordEncoder
+    @Autowired
     private IRolesRepository rolesRepository;
     @Autowired
     private IUsuariosRepository usuarioRepository;
@@ -33,18 +36,27 @@ public class UsuarioService {
     public Usuarios updateUsuario(Long id, Usuarios usuarioDetails) {
 
         Usuarios usuario = usuarioRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Usuario not found"));
+            .orElseThrow(() -> new RuntimeException("Usuario not found"));
 
-            usuario.setUsername(usuarioDetails.getUsername());
-            // usuario.setPassword(passwordEncoder.encode(usuarioDetails.getPassword()));
+        // Actualizar los detalles del usuario
+        usuario.setUsername(usuarioDetails.getUsername());
+        
+        // Codifica la nueva contraseña si se ha proporcionado
+        if (usuarioDetails.getPassword() != null && !usuarioDetails.getPassword().isEmpty()) {
+            usuario.setPassword(passwordEncoder.encode(usuarioDetails.getPassword()));
+        }
 
+        // Buscar el rol por id
+        Long rolId = usuarioDetails.getRoles().get(0).getIdRole();
+        Roles rol = rolesRepository.findById(rolId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
 
-            // String roleName = usuarioDetails.getRoles().get(0).getName();
+        // Crear una nueva lista mutable y actualizar el rol del usuario
+        List<Roles> updatedRoles = new ArrayList<>();
+        updatedRoles.add(rol);
+        usuario.setRoles(updatedRoles);
 
-            // Roles roles = rolesRepository.findByName(roleName).get();
-            // usuario.setRoles(Collections.singletonList(roles));
-
-
+        // Guardar los cambios
         return usuarioRepository.save(usuario);
     }
 
